@@ -1,13 +1,11 @@
-name: "Liza Wood"
-
+title: "Liza Wood"
 navbar: 
-  title: "Liza Wood"
   left:
-    - text: "Home"
+    - text: Home
       href: index.html
-    - text: "About"
+    - text: About
       href: about.html
-    - text: "Teaching"
+    - text: Teaching
       href: teaching.html
     - text: Tutorials
       menu:
@@ -56,7 +54,8 @@ social-network-links:
 #      path: "" # any file that's not a post will be a "page" layout by default
 #    values:
 #      layout: "page"
-      
+
+output_dir: docs    
 output:
   html_document:
     theme: paper
@@ -67,6 +66,9 @@ output:
       collapsed: yes
     include:
       in_header: header.html
+      in_footer: footer.html
     css: style.css
     lib_dir: site_libs
     self_contained: no
+
+name: lizawood5
