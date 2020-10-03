@@ -1,7 +1,5 @@
 
-url: "http://lizawood5.github.io"
-baseurl: ""
-name: "lizawood5"
+name: "https://lizawood5.github.io/"
 navbar: 
   title: "Liza Wood"
   left:
@@ -13,51 +11,11 @@ navbar:
       href: teaching.html
     - text: "Tutorials"
       menu:
-      - text: "Hellow world"
+      - text: "Hello world"
         href: helloworld.html
       - text: "Sums"
         href: sums.html
 
-#social-network-links:
-#  email: "belwood@ucdavis.edu"
-#  github: lizawood5
-#  twitter: wood__liza
-
-# Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
-#excerpt_length: 100
-
-# Whether or not to show an excerpt for every blog post in the feed page
-#feed_show_excerpt: true
-
-# Whether or not to show a list of tags below each post preview in the feed page
-#feed_show_tags: true
-
-#navbar-col: "#B0C4DE"
-#navbar-text-col: "#404040"
-#navbar-border-col: "#DDDDDD"
-#page-col: "#FFFFFF"
-#text-col: "#404040"
-#link-col: "#008AFF"
-#hover-col: "#0085A1"
-#footer-col: "#B0C4DE"
-#footer-text-col: "#777777"
-#footer-link-col: "#404040"
-
-# Default YAML values (more information on Jekyll's site)
-#defaults:
-#  -
-#    scope:
-#      path: ""
-#      type: "posts"
-#    values:
-#      layout: "post"
-#      comments: true  # add comments to all blog posts
-#      social-share: true # add social media sharing buttons to all blog posts
-#  -
-#    scope:
-#      path: "" # any file that's not a post will be a "page" layout by default
-#    values:
-#      layout: "page"
 
 output_dir: _site   
 output:
