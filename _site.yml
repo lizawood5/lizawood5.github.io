@@ -21,9 +21,6 @@ output:
   html_document:
     theme: paper
     #highlight: pygments
-    include:
-      in_header: header.html
-      in_footer: footer.html
     css: style.css
     lib_dir: site_libs
     self_contained: no
