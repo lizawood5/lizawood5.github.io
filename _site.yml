@@ -1,27 +1,27 @@
 
 url: "http://lizawood5.github.io"
 baseurl: ""
-
-title: "Liza Wood"
+name: "lizawood5"
 navbar: 
+  title: "Liza Wood"
   left:
-    - text: Home
+    - text: "Home"
       href: index.html
-    - text: About
+    - text: "About"
       href: about.html
-    - text: Teaching
+    - text: "Teaching"
       href: teaching.html
-    - text: Tutorials
+    - text: "Tutorials"
       menu:
-      - text: Hellow world
+      - text: "Hellow world"
         href: helloworld.html
-      - text: Sums
+      - text: "Sums"
         href: sums.html
 
-social-network-links:
-  email: "belwood@ucdavis.edu"
-  github: lizawood5
-  twitter: wood__liza
+#social-network-links:
+#  email: "belwood@ucdavis.edu"
+#  github: lizawood5
+#  twitter: wood__liza
 
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
 #excerpt_length: 100
@@ -74,5 +74,3 @@ output:
     css: style.css
     lib_dir: site_libs
     self_contained: no
-
-name: Liza Wood
