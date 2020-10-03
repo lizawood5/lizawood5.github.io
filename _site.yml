@@ -21,10 +21,6 @@ output:
   html_document:
     theme: paper
     #highlight: pygments
-    code_folding: show
-    toc: yes
-    toc_float:
-      collapsed: yes
     include:
       in_header: header.html
       in_footer: footer.html
