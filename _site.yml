@@ -1,5 +1,6 @@
 name: "Liza Wood"
-navbar:
+
+navbar: 
   title: "Liza Wood"
   left:
     - text: "Home"
@@ -8,3 +9,64 @@ navbar:
       href: about.html
     - text: "Teaching"
       href: teaching.html
+    - text: Tutorials
+      menu:
+      - text: Hellow world
+        href: helloworld.html
+      - text: Sums
+        href: sums.html
+
+social-network-links:
+  email: "belwood@ucdavis.edu"
+  github: lizawood5
+  twitter: wood__liza
+
+# Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
+#excerpt_length: 100
+
+# Whether or not to show an excerpt for every blog post in the feed page
+#feed_show_excerpt: true
+
+# Whether or not to show a list of tags below each post preview in the feed page
+#feed_show_tags: true
+
+#navbar-col: "#B0C4DE"
+#navbar-text-col: "#404040"
+#navbar-border-col: "#DDDDDD"
+#page-col: "#FFFFFF"
+#text-col: "#404040"
+#link-col: "#008AFF"
+#hover-col: "#0085A1"
+#footer-col: "#B0C4DE"
+#footer-text-col: "#777777"
+#footer-link-col: "#404040"
+
+# Default YAML values (more information on Jekyll's site)
+#defaults:
+#  -
+#    scope:
+#      path: ""
+#      type: "posts"
+#    values:
+#      layout: "post"
+#      comments: true  # add comments to all blog posts
+#      social-share: true # add social media sharing buttons to all blog posts
+#  -
+#    scope:
+#      path: "" # any file that's not a post will be a "page" layout by default
+#    values:
+#      layout: "page"
+      
+output:
+  html_document:
+    theme: paper
+    #highlight: pygments
+    code_folding: show
+    toc: yes
+    toc_float:
+      collapsed: yes
+    include:
+      in_header: header.html
+    css: style.css
+    lib_dir: site_libs
+    self_contained: no
