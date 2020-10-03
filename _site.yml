@@ -1,0 +1,10 @@
+name: "Liza Wood"
+navbar:
+  title: "Liza Wood"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Teaching"
+      href: teaching.html
