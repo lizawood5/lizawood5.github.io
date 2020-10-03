@@ -55,7 +55,7 @@ social-network-links:
 #    values:
 #      layout: "page"
 
-output_dir: docs    
+output_dir: _site   
 output:
   html_document:
     theme: paper
