@@ -16,7 +16,6 @@ navbar:
         href: sums.html
 
 
-output_dir: docs  
 output:
   html_document:
     theme: paper
