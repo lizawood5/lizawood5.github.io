@@ -1,3 +1,7 @@
+
+url: "http://lizawood5.github.io"
+baseurl: ""
+
 title: "Liza Wood"
 navbar: 
   left:
@@ -71,4 +75,4 @@ output:
     lib_dir: site_libs
     self_contained: no
 
-name: lizawood5.github.io
+name: Liza Wood
