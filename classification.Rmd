@@ -21,11 +21,9 @@ top30.df <- merge(top30.list, joined.df, by.y = "org_name_clean")
 
 
 
-
 ```
 
 ```{r setup, include = F}
-
 
 #training.df <- 
 #classification.df <-

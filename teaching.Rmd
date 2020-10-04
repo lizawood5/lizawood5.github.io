@@ -1,5 +1,16 @@
 ---
-title: "Courses"
+title: "Teaching"
 ---
 
-What do I teach?
+### Instructor  
+
+* Fall 2020: [ECL 298: R - Data Analysis & Visualization in Science (R-DAVIS)](https://gge-ucd.github.io/R-DAVIS/index.html)   
+* Spring 2017-2019: [FYET 177: Sustainable food in the foothills of the Andes: Destination Peru](https://cofc.abroadoffice.net/internal-program-description-FYE-Huaraz-Peru-Sustainable-Food-2017-165738-187.html)  
+* Spring 2018: [FYE 142: Farm to Fork: The Sustainable Food Movement in Charleston and Beyond](https://fye.cofc.edu/courses/course-history/spring-2018.php#farm)  
+
+
+### Teaching Assistant  
+
+* Fall 2019 & Spring 2020: PLS 49: Organic Farming Practicum
+* Winter 2019: ESP 10: Introduction to Environmental Science & Policy
+* Fall 2018: AMS 10: Introduction to American Studies

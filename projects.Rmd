@@ -1,0 +1,21 @@
+---
+title: Projects
+---
+
+I will list my projects. Maybe I could do them as tabs?
+
+## What I am working on {.tabset-fade}
+
+### Organic seed systems
+
+Working with Organic Seed Alliance and WSARE...
+
+I want to put a picture of seeds...
+
+### Nitrogen management
+
+How mandaotry information-based policy tools may promote learning by laggard farmers
+
+### Science in policy
+
+Etc, etc.
