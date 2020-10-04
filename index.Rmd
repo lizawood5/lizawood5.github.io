@@ -1,7 +1,8 @@
 ---
-title: Liza Wood
-subtitle: "ag innovation systems researcher | R enthusiast"
+title: <center>Liza Wood
+subtitle: <center>ag innovation systems researcher | R enthusiast
 ---
 
 <center> Tomatoes
-![Tomatoes](files/img/IMG_2436.jpg)
+
+![](img/toms.png)

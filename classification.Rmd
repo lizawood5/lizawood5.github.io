@@ -2,7 +2,7 @@
 title: "Classification"
 ---
 
-```{r}
+```{r, echo = F, include = F}
 library(tidyverse)
 ```
 
@@ -18,8 +18,6 @@ colnames(messy.df) <- c("unique_id", "org_name_messy")
 joined.df <- merge(messy.df, clean.df, by = "unique_id")
 top30.list <- joined.df %>% count(org_name_clean) %>% top_n(30) %>% select(org_name_clean)
 top30.df <- merge(top30.list, joined.df, by.y = "org_name_clean")
-
-
 
 ```
 

@@ -4,7 +4,7 @@ title: Projects
 
 I will list my projects. Maybe I could do them as tabs?
 
-## What I am working on {.tabset-fade}
+## What I am working on {.tabset .tabset-fade}
 
 ### Organic seed systems
 
