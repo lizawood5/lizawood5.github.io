@@ -2,28 +2,17 @@
 title: "Classification"
 ---
 
+Supervised machine learning -- where researchers train algorithms to identify known patterns in order to later detect unknown patterns -- has revolutionized technologies (think, facial recognition).
+
+It can also be useful for basic analyses like data cleaning, coding qualitative data into assigned themes, or even cleaning textual data. For instance in network research, surveys solicit respondents to write down a bunch of names
+
 ```{r, echo = F, include = F}
 library(tidyverse)
 ```
 
 
 
-```{r reading in data, include = F}
-clean.df <- read.csv("data/slr_network.csv") %>% select(X, name_org)
-colnames(clean.df) <- c("unique_id", "org_name_clean")
-
-messy.df <- read.csv("data/slr_network_to_fix.csv") %>% select(X, name_org)
-colnames(messy.df) <- c("unique_id", "org_name_messy")
-
-joined.df <- merge(messy.df, clean.df, by = "unique_id")
-top30.list <- joined.df %>% count(org_name_clean) %>% top_n(30) %>% select(org_name_clean)
-top30.df <- merge(top30.list, joined.df, by.y = "org_name_clean")
-
-```
-
-```{r setup, include = F}
-
-#training.df <- 
-#classification.df <-
+```{r}
+#Code coming soon...
 ```
 

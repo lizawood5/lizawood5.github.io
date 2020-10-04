@@ -1,0 +1,15 @@
+---
+Title: "Ordered Logits: Proportional and non-proportional sequential models"
+Subtitle: "Digging deeper in vglm"
+---
+
+To generate predicted probabilities, create a data frame from your original data for all of the independent variables. One quick way of creating profiles it to set all independent variables to their median, except for one which can be represented across its range of values. In our case, we will hold all else constant except for economic values.
+```{r predicted probs}
+pp_df = with(df, data.frame(acres = median(acres, na.rm = T), income = median(income, na.rm = T), education = median(education, na.rm = T), econ.value = c(1:5), envt.value = median(envt.value, na.rm = T), info.count = median(info.count, na.rm = T)))
+```
+
+The beauty of the `polr` model is that it is compatible with the "prob" type in the `predict` function to automatically generate predicted probabilities for the profiles defined in the previous dataframe creation.
+
+```{r predict function}
+pp <- cbind(pp_df, predict(polr.model, newdata = pp_df, type = "prob", se.fit = T)); pp
+```

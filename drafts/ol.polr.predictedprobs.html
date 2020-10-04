@@ -11,7 +11,7 @@
 
 
 
-<title>Classification</title>
+<title>ol.polr.predictedprobs.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,8 +21,6 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -249,93 +247,6 @@ summary {
 </style>
 
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 64px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h2 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h3 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h4 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h5 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h6 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
 
 <!-- tabsets -->
 
@@ -409,86 +320,30 @@ $(document).ready(function () {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Liza Wood</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="projects.html">Projects</a>
-</li>
-<li>
-  <a href="teaching.html">Teaching</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Tutorials
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="ol.partialprop.html">Ordered Logit: vglm &amp; polr</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Computational methods</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="classification.html">Classification</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="http://github.com/lizawood5">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/wood__liza">
-    <span class="fa fa-twitter fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
 <div class="fluid-row" id="header">
 
 
 
-<h1 class="title toc-ignore">Classification</h1>
 
 </div>
 
 
-<p>Supervised machine learning – where researchers train algorithms to identify known patterns in order to later detect unknown patterns – has revolutionized technologies (think, facial recognition).</p>
-<p>It can also be useful for basic analyses like data cleaning, coding qualitative data into assigned themes, or even cleaning textual data. For instance in network research, surveys solicit respondents to write down a bunch of names</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Code coming soon...</span></span></code></pre></div>
+<p>To generate predicted probabilities, create a data frame from your original data for all of the independent variables. One quick way of creating profiles it to set all independent variables to their median, except for one which can be represented across its range of values. In our case, we will hold all else constant except for economic values.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pp_df =<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">data.frame</span>(<span class="dt">acres =</span> <span class="kw">median</span>(acres, <span class="dt">na.rm =</span> T), <span class="dt">income =</span> <span class="kw">median</span>(income, <span class="dt">na.rm =</span> T), <span class="dt">education =</span> <span class="kw">median</span>(education, <span class="dt">na.rm =</span> T), <span class="dt">econ.value =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">envt.value =</span> <span class="kw">median</span>(envt.value, <span class="dt">na.rm =</span> T), <span class="dt">info.count =</span> <span class="kw">median</span>(info.count, <span class="dt">na.rm =</span> T)))</span></code></pre></div>
+<p>The beauty of the <code>polr</code> model is that it is compatible with the “prob” type in the <code>predict</code> function to automatically generate predicted probabilities for the profiles defined in the previous dataframe creation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pp &lt;-<span class="st"> </span><span class="kw">cbind</span>(pp_df, <span class="kw">predict</span>(polr.model, <span class="dt">newdata =</span> pp_df, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>, <span class="dt">se.fit =</span> T)); pp</span></code></pre></div>
+<pre><code>##   acres income education econ.value envt.value info.count        Not  Somewhat
+## 1  4.11      3         6          1        4.2          3 0.05523996 0.2242197
+## 2  4.11      3         6          2        4.2          3 0.08809573 0.3024521
+## 3  4.11      3         6          3        4.2          3 0.13764639 0.3766306
+## 4  4.11      3         6          4        4.2          3 0.20868934 0.4275913
+## 5  4.11      3         6          5        4.2          3 0.30349489 0.4394613
+##        Very
+## 1 0.7205403
+## 2 0.6094521
+## 3 0.4857230
+## 4 0.3637194
+## 5 0.2570438</code></pre>
 
 
 

@@ -1,18 +1,17 @@
 ---
 title: Projects
 ---
-### What I am working on {.tabset .tabset-fade}
+### {.tabset .tabset-fade}
 
 #### Organic seed systems
 
-Working with Organic Seed Alliance and WSARE...
+Seed systems -- the seed savers, breeders, producers, companies, and ag-innovation agencies that are responsible for supplying our agricultural system with seeds -- are complex networks that rely on coordination of information and resources across multiple stakeholders.  Little is known about the systems-level interactions that support such a system, and the organic sector faces particular challenges with regards to research & development, intellectual property protections, and supply chain reliability. Along with the Organic Seed Alliance, I am conducting network analyses of organic seed systems to better understand opportunities for increasing social-ecological resilience. This project is funded by the [Western Sustainable Agriculture Research and Education Program](https://western.sare.org/).
 
-I want to put a picture of seeds...
 
 #### Nitrogen management
 
-How mandaotry information-based policy tools may promote learning by laggard farmers
+How mandatory information-based policy tools may promote learning by laggard farmers
 
 #### Science in policy
 
-Etc, etc.
+3 Revolutions for Mobility with UC Davis's ITS

@@ -1,0 +1,45 @@
+---
+Title: "Ordered Logits: Predicted probabilities for proportional odds models"
+Subtitle: "Digging deeper in vglm"
+---
+
+First, let's load in our packages
+```{r setup, echo=T, include = F}
+library(MASS) # polr package
+library(dplyr)
+```
+
+```{r, include = F}
+df <- read.csv("data/farmer.sample.data.2.csv")
+dfr <- round(df[ ,c(3,5,6)], 2)
+dff <- df[ ,c(1,2,4,7)]
+df <- cbind(dfr, dff)
+colnames(df)[4] <- "interest"
+
+df$interest <- ifelse(df$interest == "None", "Not",
+                      ifelse(df$interest == "Conceptual", "Somewhat",
+                      ifelse(df$interest == "Applied", "Very", NA)))
+df <- df %>% dplyr::select(interest, acres, income, education, econ.value, envt.value, info.count)
+```
+
+For this example, suppose we are interested in the question: What drives farmers' interest in technology x? We have data on farmers' education and income, their farm size, as well as their attitudes towards things like earning money, protecting the environment, as well has how connected they are to different information sources. We are interested in the dependent variable: Farmer interest in the technology, scored as not, somewhat, or very (1-3). Let's inspect this data
+```{r inspect data}
+head(df)
+# Make sure your dependent variable is in the right order
+df$interest = factor(df$interest, c('Not', 'Somewhat', 'Very'))
+```
+
+
+```{r models}
+polr.model <- polr(interest ~ acres + income + education + econ.value + envt.value + info.count, data = df, Hess = T)
+```
+To generate predicted probabilities, create a data frame from your original data for all of the independent variables. One quick way of creating profiles it to set all independent variables to their median, except for one which can be represented across its range of values. In our case, we will hold all else constant except for economic values.
+```{r predicted probs}
+pp_df = with(df, data.frame(acres = median(acres, na.rm = T), income = median(income, na.rm = T), education = median(education, na.rm = T), econ.value = c(1:5), envt.value = median(envt.value, na.rm = T), info.count = median(info.count, na.rm = T)))
+```
+
+The beauty of the `polr` model is that it is compatible with the "prob" type in the `predict` function to automatically generate predicted probabilities for the profiles defined in the previous dataframe creation.
+
+```{r predict function}
+pp <- cbind(pp_df, predict(polr.model, newdata = pp_df, type = "prob", se.fit = T)); pp
+```

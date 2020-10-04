@@ -1,4 +1,4 @@
-
+#navabr was previous version
 navbar: 
   title: "Liza Wood"
   left:
@@ -15,8 +15,8 @@ navbar:
       - text: "Statistics"
         href: stats.splash.html
         menu:
-          - text: "Ordered logit"
-            href: orderedlogits.html
+          - text: "Ordered Logit: vglm & polr"
+            href: ol.partialprop.html
       - text: "Computational methods"
         href: comp.splash.html
         menu:
@@ -35,6 +35,7 @@ output_dir: "."
 output:
   html_document:
     theme: paper
+    highlight: tango
     css: 'style.css'
     lib_dir: site_libs
     self_contained: no

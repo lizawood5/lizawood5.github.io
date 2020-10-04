@@ -11,7 +11,7 @@
 
 
 
-<title>Classification</title>
+<title>sequential.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -481,14 +481,26 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Classification</h1>
 
 </div>
 
 
-<p>Supervised machine learning – where researchers train algorithms to identify known patterns in order to later detect unknown patterns – has revolutionized technologies (think, facial recognition).</p>
-<p>It can also be useful for basic analyses like data cleaning, coding qualitative data into assigned themes, or even cleaning textual data. For instance in network research, surveys solicit respondents to write down a bunch of names</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#Code coming soon...</span></span></code></pre></div>
+<p>To generate predicted probabilities, create a data frame from your original data for all of the independent variables. One quick way of creating profiles it to set all independent variables to their median, except for one which can be represented across its range of values. In our case, we will hold all else constant except for economic values.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pp_df =<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">data.frame</span>(<span class="dt">acres =</span> <span class="kw">median</span>(acres, <span class="dt">na.rm =</span> T), <span class="dt">income =</span> <span class="kw">median</span>(income, <span class="dt">na.rm =</span> T), <span class="dt">education =</span> <span class="kw">median</span>(education, <span class="dt">na.rm =</span> T), <span class="dt">econ.value =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">envt.value =</span> <span class="kw">median</span>(envt.value, <span class="dt">na.rm =</span> T), <span class="dt">info.count =</span> <span class="kw">median</span>(info.count, <span class="dt">na.rm =</span> T)))</span></code></pre></div>
+<p>The beauty of the <code>polr</code> model is that it is compatible with the “prob” type in the <code>predict</code> function to automatically generate predicted probabilities for the profiles defined in the previous dataframe creation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pp &lt;-<span class="st"> </span><span class="kw">cbind</span>(pp_df, <span class="kw">predict</span>(polr.model, <span class="dt">newdata =</span> pp_df, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>, <span class="dt">se.fit =</span> T)); pp</span></code></pre></div>
+<pre><code>##   acres income education econ.value envt.value info.count        Not  Somewhat
+## 1  4.11      3         6          1        4.2          3 0.05523996 0.2242197
+## 2  4.11      3         6          2        4.2          3 0.08809573 0.3024521
+## 3  4.11      3         6          3        4.2          3 0.13764639 0.3766306
+## 4  4.11      3         6          4        4.2          3 0.20868934 0.4275913
+## 5  4.11      3         6          5        4.2          3 0.30349489 0.4394613
+##        Very
+## 1 0.7205403
+## 2 0.6094521
+## 3 0.4857230
+## 4 0.3637194
+## 5 0.2570438</code></pre>
 
 
 
