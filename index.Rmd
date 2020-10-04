@@ -3,6 +3,5 @@ title: <center>Liza Wood
 subtitle: <center>ag innovation systems researcher | R enthusiast
 ---
 
-<center> Tomatoes
 
 ![](img/toms.png)

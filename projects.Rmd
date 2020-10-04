@@ -1,18 +1,18 @@
 ---
-title: ## Projects {.tabset .tabset-fade}
+title: Projects
 ---
+### What I am working on {.tabset .tabset-fade}
 
-
-### Organic seed systems
+#### Organic seed systems
 
 Working with Organic Seed Alliance and WSARE...
 
 I want to put a picture of seeds...
 
-### Nitrogen management
+#### Nitrogen management
 
 How mandaotry information-based policy tools may promote learning by laggard farmers
 
-### Science in policy
+#### Science in policy
 
 Etc, etc.
