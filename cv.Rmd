@@ -6,7 +6,7 @@ subtitle: <center>Center for Environmental Policy & Behavior <br> University of 
 
 ***
 
-####EDUCATION
+#### EDUCATION
 
 Ph.D. Student, Ecology | Designated Emphasis: Computational Social Science <span style="float:right;">2018 – present</span>  
 University of California Davis, Davis, CA  

@@ -3,5 +3,5 @@ title: "Tutorials"
 ---
 
 <br>
-###Statistics
+### Statistics
 [Ordered logits: proportional and partial proportional models with polr and vglm](ol.partialprop.html)
