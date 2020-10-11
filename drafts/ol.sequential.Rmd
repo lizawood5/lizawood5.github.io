@@ -1,5 +1,0 @@
----
-Title: "Ordered Logits: Sequential Link Function"
----
-
-vgam.model.cratio = vglm(ordered(interest) ~ acres + income + education + econ.value + envt.value + info.count, data = df, family=cratio(parallel = T, reverse = T))

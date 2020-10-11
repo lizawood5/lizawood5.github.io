@@ -1,5 +1,5 @@
 ---
-title: Ordered Logits - Proportional and partial-proportional cumulative models
+title: "Proportional and partial-proportional cumulative ordered logits"
 subtitle: A quick look at polr and vglm
 ---
 

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>cv.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Liza Wood</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="teaching.html">Teaching</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistics</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="ol.partialprop.html">Ordered Logit: vglm &amp; polr</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Computational methods</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="classification.html">Classification</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://github.com/lizawood5">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/wood__liza">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore"><center>
+Liza Wood
+</center></h1>
+<h3 class="subtitle"><center>
+Center for Environmental Policy &amp; Behavior <br> University of California, Davis
+</center></h3>
+
+</div>
+
+
+<center>
+<i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:belwood@ucdavis.edu" class="email">belwood@ucdavis.edu</a> | <a href="https://lizawood5.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a>
+</center>
+<hr />
+<p>####EDUCATION</p>
+<p>Ph.D. Student, Ecology | Designated Emphasis: Computational Social Science <span style="float:right;">2018 – present</span><br />
+University of California Davis, Davis, CA<br />
+M.Sc., Organic Farming and Food Production Systems <span style="float:right;">2015</span><br />
+Newcastle University, Newcastle upon Tyne, United Kingdom<br />
+M.Sc., Sustainability Science and Policy <span style="float:right;">2014</span><br />
+Maastricht University, Maastricht, Netherlands<br />
+B.A., Political Science | B.A., Biology <span style="float:right;">2013</span><br />
+Honors College at the College of Charleston, Charleston, SC</p>
+<hr />
+<h4>
+SELECTED FELLOWSHIPS &amp; AWARDS
+</h4>
+<p>Western Sustainable Agriculture Research &amp; Education Graduate Student Grant | Davis, CA <span style="float:right;">2020 – 2022</span><br />
+UC Davis Muir Institute Graduate Fellowship | Davis, CA<span style="float:right;">2019 – 2020</span><br />
+UC Davis Henry A. Jastro Student Research Fellowship | Davis, CA<span style="float:right;">2019 – 2020</span><br />
+UC Davis Graduate Group in Ecology Fellowship | Davis, CA<span style="float:right;">2018 – 2020</span><br />
+Rotary Foundation Global Grant Scholarship | Newcastle, United Kingdom<span style="float:right;">2014 – 2015</span><br />
+Fulbright Full Grant | Maastricht, Netherlands<span style="float:right;">2013 – 2014</span><br />
+ASIANetwork/Freeman-Asia Foundation Student-Faculty Fellowship | Isaan, Thailand<span style="float:right;"> 2012</span><br />
+College of Charleston Summer Undergraduate Research with Faculty Grant | Charleston, SC<span style="float:right;"> 2011</span></p>
+<hr />
+<h4>
+RESEARCH EXPERIENCE
+</h4>
+<p><strong>Graduate Researcher | 3 Revolutions for Future Mobility Program</strong><span style="float:right;">2020</span><br />
+University of California, Davis | PI: Dr. Tyler Scott<br />
+Employing computational methods to understand knowledge transfer in transportation policy, and the role of science and technology resources used in transportation governance <strong>Graduate Researcher | CDFA Fertilizer Research and Education Program</strong><span style="float:right;">2019</span><br />
+University of California, Davis | PI: Dr. Mark Lubell<br />
+Researching how information-based policy tools affect farmer conservation behavior related to soil nitrogen management in the Central Valley<br />
+<strong>Graduate Researcher | Horticulture Innovation Lab &amp; USAID</strong><span style="float:right;">2019</span><br />
+University of California, Davis | PI: Dr. Elizabeth Mitcham<br />
+Reviewed the lab’s projects in the context of innovation diffusion theories to glean generalizable findings regarding technology adoption for sustainable international development<br />
+<strong>Graduate Researcher | European Union Healthy Minor Cereals Project</strong><span style="float:right;">2014 – 2015</span><br />
+Newcastle University | PI: Dr. Carlo Leifert<br />
+Evaluated crop quality of spelt grown under organic intensification strategies in Greece and compared nutritional value of organic and conventional spelt and wheat flour in laboratory assays<br />
+<strong>Graduate Researcher | Centre for Integrated assessment &amp; Sustainable Development</strong><span style="float:right;">2013 – 2014</span><br />
+Maastricht University | PI: Dr. Pieter Glasbergen<br />
+Developed sustainability criteria for climate change adaptation strategies to evaluate four major certification standards and conducted action research with Dutch-based NGO, Solidaridad<br />
+<strong>Undergraduate Researcher | ASIANetwork &amp; Freeman Asia Foundation</strong><span style="float:right;">2012 – 2013</span><br />
+College of Charleston | PI: Dr. Helen Delfeld<br />
+Conducted survey research to understand cultural narratives related to rice varieties in NE Thailand and the role of alternative markets in the rice commodity supply chain<br />
+<strong>Undergraduate Researcher | Welch Herpetology Lab</strong><span style="float:right;">2011 – 2013</span><br />
+College of Charleston | PI: Dr. Allison Welch<br />
+Evaluated the impacts of anthropogenic environmental stressors (sublethal levels of salinity and pesticides) on the activity, growth, and survival of tadpoles in laboratory assays</p>
+<hr />
+<h4>
+TEACHING EXPERIENCE
+</h4>
+<p><strong>Instructor</strong> | Ecology Graduate Group, UC Davis<br />
+ECL 298: R Data Analysis for Visualization in Science<span style="float:right;">Fall 2020</span><br />
+<strong>Teaching Assistant</strong> | Plant Sciences; Environmental Science &amp; Policy; America Studies, UC Davis</span><br />
+PLS 49: Organic Crop Production Practicum<span style="float:right;">Fall 2019, Spring 2020</span><br />
+ESP 10: Current Issues in the Environment<span style="float:right;">Winter 2019</span><br />
+AMS 10: Introduction to American Studies<span style="float:right;">Fall 2018</span><br />
+<strong>Instructor</strong> | Environmental Studies, College of Charleston<br />
+FYET 177: Sustainable Food in the Foothills of the Andes<span style="float:right;">Spring 2017 – 2019</span><br />
+FYSE 142: Farm to Fork: The Sustainable Food Movement in Charleston<span style="float:right;">Spring 2018</span></p>
+<hr />
+<h4>
+PEER-REVIEWED PUBLICATIONS
+</h4>
+<p>Wang, J, Hasanalieva, G., <strong>Wood, L</strong>, et al. (2020). Effect of wheat species (Triticum aestivum vs T. spelta), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 1. Mycotoxin content. Food Chemistry 327, 127011.<br />
+Wang, J, Chatzidimitriou, E., <strong>Wood, L</strong>, et al. (2020). Effect of wheat species (Triticum aestivum vs T. spelta), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 2. Antioxidant activity, and phenolic and mineral content. Food Chemistry: X 6, 100091.<br />
+Chaffin, L., Korey, C., Warnick, D., &amp; <strong>Wood, L</strong>. (2019). Life So Far: A Grounded Theory Analysis of College Student Transitions Through the Sophomore Year. Journal of The FYE &amp; Students in Transition 31(2), 79-93.<br />
+<strong>Wood, L</strong>. &amp; Welch, A. (2015). Assessment of interactive effects of elevated salinity and three pesticides on life history and behavior of southern toad (Anaxyrus terrestris) tadpoles. Environmental Toxicology &amp; Chemistry 34(3), 667-676.<br />
+<strong>Wood, L</strong>. (2013). “Sowing sustainability: Rice commodity pathways, NGOs, and farmers’ engagement with alternative agriculture in northeastern Thailand.” Growing Sustainable Communities: A Development Guide for Southeast Asia. (pp. 111-151). Ed. Brennan, L., Fien, J., Parker, L., Duong, H., Anh Doan, M., &amp; Watne. T. Australia: Tilde University Press.</p>
+<hr />
+<h4>
+SELECTED PRESENTATIONS
+</h4>
+<p><strong>Wood, L</strong>. &amp; Rudnick, J. (2020, April). “The effect of information-based policy tools on farmers’ nitrogen management.” American Association of Geographers Annual Meeting, Denver, CO.<br />
+<strong>Wood, L</strong>. (2019, July). “Assessing Seed System Resilience: A Case Study from Northeastern Thailand.” International Association for the Study of the Commons, Lima, Peru.<br />
+Korey, C., <strong>Wood, L</strong>. &amp; Warnick, C. (2017, October). “FYEvolution: Multiple Transitions Revealed Through Student Voice Assessment.” Students in Transition, Costa Mesa, CA.<br />
+Korey, C. &amp; <strong>Wood, L</strong>. (2017, February). “Life So Far – Student Voice as an Assessment Tool.” First-Year Experience Conference, Atlanta, GA.<br />
+<strong>Wood, L</strong>. (2015, February). “Mo’ meat, mo’ problems: An assessment of cultured meat and food system transitions.” Maastricht University Sustainability Journal Symposium, remote presentation.<br />
+<strong>Wood, L</strong>. &amp; Delfeld, H. (2012, September). “Non-governmental agricultural movements and rice commodity systems.” 2nd Workshop on Anticommodities: Local Forms Of Production As Resistance Against Market Domination. Wageningen, Netherlands.<br />
+<strong>Wood, L</strong>. &amp; Welch, A. (2012, January). “Tadpole responses to environmental stressors – pesticides and salinity.” Society for Integrative and Comparative Biology, Charleston, SC.</p>
+<hr />
+<h4>
+PROFESSIONAL EXPERIENCE
+</h4>
+<p>First Year Experience Assistant Director | College of Charleston <span style="float:right;">2016 – 2018</span><br />
+Environmental Studies Adjunct Instructor | College of Charleston <span style="float:right;">2017 – 2019</span><br />
+Climate Change &amp; Agricultural Adaptation Intern | Solidaridad Network <span style="float:right;">2013 – 2014</span><br />
+Climate &amp; Fisheries Extension Researcher | SC Sea Grant Consortium <span style="float:right;">2012 – 2013</span></p>
+<hr />
+<h4>
+ACADEMIC SERVICE
+</h4>
+<p>Diversity Committee Member, Awards and Admissions Subcommittee | UC Davis <span style="float:right;">2019 – present</span><br />
+Sustainability Literacy Implementation Committee Member | College of Charleston <span style="float:right;">2017 – 2018</span><br />
+Faculty for Sustainable Living Workshop Coordinator | College of Charleston <span style="float:right;">2016 – 2018</span><br />
+Sociology of Food Service-Learning Liaison | College of Charleston <span style="float:right;">2016 – 2017</span><br />
+Student Union Council Representative &amp; Secretary | Newcastle University <span style="float:right;">2014 – 2015</span><br />
+Student Advisory Board Representative | Maastricht University <span style="float:right;">2013 – 2014</span></p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
