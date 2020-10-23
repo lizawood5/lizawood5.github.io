@@ -1,5 +1,5 @@
 ---
-title: "Teaching"
+title: <center>Teaching</center>
 ---
 
 ### Instructor  
@@ -14,7 +14,7 @@ title: "Teaching"
 * Winter 2019: ESP 10: Introduction to Environmental Science & Policy
 * Fall 2018: AMS 10: Introduction to American Studies
 
-### Seminar & Workshop Leader   
+### Seminar & Workshop Facilitator  
 
-* Spring 2020: ECL 290: Near Futures in Ecology: A look at fiction's role in communicating science
+* Spring 2020: ECL 290: Near Futures in Ecology: Fiction's role in communicating science
 * Fall 2020: R-Ladies, Davis chapter

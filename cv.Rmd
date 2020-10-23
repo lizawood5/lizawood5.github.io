@@ -32,56 +32,14 @@ College of Charleston Summer Undergraduate Research with Faculty Grant | Charles
 
 ***
 
-<h4>RESEARCH EXPERIENCE</h4> 
-
-**Graduate Researcher | 3 Revolutions for Future Mobility Program**<span style="float:right;">2020</span>  
-University of California, Davis | PI: Dr. Tyler Scott   
-Employing computational methods to understand knowledge transfer in transportation policy, and the role of science and technology resources used in transportation governance 
-**Graduate Researcher | CDFA Fertilizer Research and Education Program**<span style="float:right;">2019</span>  
-University of California, Davis | PI: Dr. Mark Lubell   
-Researching how information-based policy tools affect farmer conservation behavior related to soil nitrogen management in the Central Valley  
-**Graduate Researcher | Horticulture Innovation Lab & USAID**<span style="float:right;">2019</span>	 
-University of California, Davis | PI: Dr. Elizabeth Mitcham   
-Reviewed the lab’s projects in the context of innovation diffusion theories to glean generalizable findings regarding technology adoption for sustainable international development   
-**Graduate Researcher | European Union Healthy Minor Cereals Project**<span style="float:right;">2014 – 2015</span>   
-Newcastle University | PI: Dr. Carlo Leifert   
-Evaluated crop quality of spelt grown under organic intensification strategies in Greece and compared nutritional value of organic and conventional spelt and wheat flour in laboratory assays  
-**Graduate Researcher | Centre for Integrated assessment & Sustainable Development**<span style="float:right;">2013 – 2014</span>  
-Maastricht University | PI: Dr. Pieter Glasbergen   
-Developed sustainability criteria for climate change adaptation strategies to evaluate four major certification standards and conducted action research with Dutch-based NGO, Solidaridad  
-**Undergraduate Researcher | ASIANetwork & Freeman Asia Foundation**<span style="float:right;">2012 – 2013</span>    
-College of Charleston | PI: Dr. Helen Delfeld  				          		 
-Conducted survey research to understand cultural narratives related to rice varieties in NE Thailand and the role of alternative markets in the rice commodity supply chain  
-**Undergraduate Researcher | Welch Herpetology Lab**<span style="float:right;">2011 – 2013</span>  
-College of Charleston | PI: Dr. Allison Welch			      
-Evaluated the impacts of anthropogenic environmental stressors (sublethal levels of salinity and pesticides) on the activity, growth, and survival of tadpoles in laboratory assays  
-
-***
-
-<h4>TEACHING EXPERIENCE</h4>  
-
-**Instructor** | Ecology Graduate Group, UC Davis  
-ECL 298: R Data Analysis for Visualization in Science<span style="float:right;">Fall 2020</span>  
-**Teaching Assistant** | Plant Sciences; Environmental Science & Policy; America Studies, UC Davis</span>    
-PLS 49: Organic Crop Production Practicum<span style="float:right;">Fall 2019, Spring 2020</span>   
-ESP 10: Current Issues in the Environment<span style="float:right;">Winter 2019</span>    
-AMS 10: Introduction to American Studies<span style="float:right;">Fall 2018</span>    
-**Instructor** | Environmental Studies, College of Charleston  
-FYET 177: Sustainable Food in the Foothills of the Andes<span style="float:right;">Spring 2017 – 2019</span>     
-FYSE 142: Farm to Fork: The Sustainable Food Movement in Charleston<span style="float:right;">Spring 2018</span>    
-
-***
-
 <h4>PEER-REVIEWED PUBLICATIONS</h4>   
 
-Wang, J, Hasanalieva, G., **Wood, L**, et al. (2020). Effect of wheat species (Triticum aestivum vs T. spelta), 
-farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 1. Mycotoxin content. Food Chemistry 327, 127011.  
-Wang, J, Chatzidimitriou, E., **Wood, L**, et al. (2020). Effect of wheat species (Triticum aestivum vs T. spelta), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 2. Antioxidant activity, and phenolic and mineral content. Food Chemistry: X 6, 100091.  
-Chaffin, L., Korey, C., Warnick, D., & **Wood, L**. (2019). Life So Far: A Grounded Theory Analysis of College 
-Student Transitions Through the Sophomore Year. Journal of The FYE & Students in Transition 31(2), 79-93.  
-**Wood, L**. & Welch, A. (2015). Assessment of interactive effects of elevated salinity and three pesticides on life history and behavior of southern toad (Anaxyrus terrestris) tadpoles. Environmental Toxicology & Chemistry 34(3), 667-676.  
+Wang, J, Hasanalieva, G., **Wood, L**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 1. Mycotoxin content. *Food Chemistry 327*, 127011.  
+Wang, J, Chatzidimitriou, E., **Wood, L**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 2. Antioxidant activity, and phenolic and mineral content. *Food Chemistry: X 6*, 100091.  
+Chaffin, L., Korey, C., Warnick, D., & **Wood, L**. (2019). Life So Far: A Grounded Theory Analysis of College Student Transitions Through the Sophomore Year. *Journal of The First Year Experience & Students in Transition 31(2)*, 79-93.  
+**Wood, L**. & Welch, A. (2015). Assessment of interactive effects of elevated salinity and three pesticides on life history and behavior of southern toad (*Anaxyrus terrestris*) tadpoles. *Environmental Toxicology & Chemistry* 34(3), 667-676.  
 **Wood, L**. (2013). “Sowing sustainability: Rice commodity pathways, NGOs, and farmers’ engagement with 
-alternative agriculture in northeastern Thailand.” Growing Sustainable Communities: A Development Guide for Southeast Asia. (pp. 111-151). Ed. Brennan, L., Fien, J., Parker, L., Duong, H., Anh Doan, M., & Watne. T. Australia: Tilde University Press.  
+alternative agriculture in northeastern Thailand.” *Growing Sustainable Communities: A Development Guide for Southeast Asia.* (pp. 111-151). Ed. Brennan, L., Fien, J., Parker, L., Duong, H., Anh Doan, M., & Watne. T. Australia: Tilde University Press.  
 
 ***
 
@@ -100,6 +58,46 @@ transitions.” Maastricht University Sustainability Journal Symposium, remote p
 **Wood, L**. & Delfeld, H. (2012, September). “Non-governmental agricultural movements and rice commodity 
 systems.” 2nd Workshop on Anticommodities: Local Forms Of Production As Resistance Against Market Domination. Wageningen, Netherlands.  
 **Wood, L**. & Welch, A. (2012, January). “Tadpole responses to environmental stressors – pesticides and salinity.” Society for Integrative and Comparative Biology, Charleston, SC.   
+
+***
+
+<h4>RESEARCH EXPERIENCE</h4> 
+
+**3 Revolutions for Future Mobility Program**<span style="float:right;">2020</span>  
+  University of California, Davis | PI: Dr. Tyler Scott   
+  Employing computational methods to understand knowledge transfer in transportation policy, and the role of science and technology resources used in transportation governance   
+**CDFA Fertilizer Research and Education Program**<span style="float:right;">2019</span>  
+  University of California, Davis | PI: Dr. Mark Lubell   
+  Researching how information-based policy tools affect farmer conservation behavior related to soil nitrogen management in the Central Valley  
+**Horticulture Innovation Lab & USAID**<span style="float:right;">2019</span>	 
+  University of California, Davis | PI: Dr. Elizabeth Mitcham   
+  Reviewed the lab’s projects in the context of innovation diffusion theories to glean generalizable findings regarding technology adoption for sustainable international development   
+**European Union Healthy Minor Cereals Project**<span style="float:right;">2014 – 2015</span>   
+  Newcastle University | PI: Dr. Carlo Leifert   
+  Evaluated crop quality of spelt grown under organic intensification strategies in Greece and compared nutritional value of organic and conventional spelt and wheat flour in laboratory assays  
+**Centre for Integrated assessment & Sustainable Development**<span style="float:right;">2013 – 2014</span>
+  Maastricht University | PI: Dr. Pieter Glasbergen   
+  Developed sustainability criteria for climate change adaptation strategies to evaluate four major certification standards and conducted action research with Dutch-based NGO, Solidaridad  
+**ASIANetwork & Freeman Asia Foundation**<span style="float:right;">2012 – 2013</span>    
+  College of Charleston | PI: Dr. Helen Delfeld  				          		 
+  Conducted survey research to understand cultural narratives related to rice varieties in NE Thailand and the role of alternative markets in the rice commodity supply chain  
+**Welch Herpetology Lab**<span style="float:right;">2011 – 2013</span>  
+  College of Charleston | PI: Dr. Allison Welch			      
+  Evaluated the impacts of anthropogenic environmental stressors (sublethal levels of salinity and     pesticides) on the activity, growth, and survival of tadpoles in laboratory assays  
+
+***
+
+<h4>TEACHING EXPERIENCE</h4>  
+
+**Instructor** | Ecology Graduate Group, UC Davis  
+  ECL 298: R Data Analysis for Visualization in Science<span style="float:right;">Fall 2020</span>  
+**Teaching Assistant** | Plant Sciences; Environmental Science & Policy; America Studies, UC Davis</span>   
+  PLS 49: Organic Crop Production Practicum<span style="float:right;">Fall 2019, Spring 2020</span>   
+  ESP 10: Current Issues in the Environment<span style="float:right;">Winter 2019</span>    
+  AMS 10: Introduction to American Studies<span style="float:right;">Fall 2018</span>    
+**Instructor** | Environmental Studies, College of Charleston  
+  FYET 177: Sustainable Food in the Foothills of the Andes<span style="float:right;">Spring 2017 – 2019</span>     
+  FYSE 142: Farm to Fork: The Sustainable Food Movement in Charleston<span style="float:right;">Spring 2018</span>    
 
 ***
 

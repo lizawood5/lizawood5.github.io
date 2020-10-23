@@ -1,0 +1,4 @@
+---
+Title: "gsub vs. stringr"
+Subtitle: "Playing with text data"
+---

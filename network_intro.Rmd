@@ -1,0 +1,18 @@
+---
+Title: "Network basics"
+Subtitle: "Exploring Twitter network"
+---
+
+Adapted from lessons by [Lorien Jasney](https://www.lorienjasny.com/) at [SESYNC](https://www.sesync.org/) Workshop on SES 
+
+
+
+
+
+
+
+
+
+
+
+Great resource for igraph is (https://kateto.net/network-visualization)
