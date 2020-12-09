@@ -11,7 +11,7 @@
 
 
 
-<title>Proportional and partial-proportional cumulative ordered logits</title>
+<title>Ordered logits introduction</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -31,68 +33,6 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      code.sourceCode > span { display: inline-block; line-height: 1.25; }
-  code.sourceCode > span { color: inherit; text-decoration: inherit; }
-  code.sourceCode > span:empty { height: 1.2em; }
-  .sourceCode { overflow: visible; }
-  code.sourceCode { white-space: pre; position: relative; }
-  div.sourceCode { margin: 1em 0; }
-  pre.sourceCode { margin: 0; }
-  @media screen {
-  div.sourceCode { overflow: auto; }
-  }
-  @media print {
-  code.sourceCode { white-space: pre-wrap; }
-  code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-  }
-  pre.numberSource code
-    { counter-reset: source-line 0; }
-  pre.numberSource code > span
-    { position: relative; left: -4em; counter-increment: source-line; }
-  pre.numberSource code > span > a:first-child::before
-    { content: counter(source-line);
-      position: relative; left: -1em; text-align: right; vertical-align: baseline;
-      border: none; display: inline-block;
-      -webkit-touch-callout: none; -webkit-user-select: none;
-      -khtml-user-select: none; -moz-user-select: none;
-      -ms-user-select: none; user-select: none;
-      padding: 0 4px; width: 4em;
-      color: #aaaaaa;
-    }
-  pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-  div.sourceCode
-    {  background-color: #f8f8f8; }
-  @media screen {
-  code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-  }
-  code span.al { color: #ef2929; } /* Alert */
-  code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-  code span.at { color: #c4a000; } /* Attribute */
-  code span.bn { color: #0000cf; } /* BaseN */
-  code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-  code span.ch { color: #4e9a06; } /* Char */
-  code span.cn { color: #000000; } /* Constant */
-  code span.co { color: #8f5902; font-style: italic; } /* Comment */
-  code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-  code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-  code span.dt { color: #204a87; } /* DataType */
-  code span.dv { color: #0000cf; } /* DecVal */
-  code span.er { color: #a40000; font-weight: bold; } /* Error */
-  code span.ex { } /* Extension */
-  code span.fl { color: #0000cf; } /* Float */
-  code span.fu { color: #000000; } /* Function */
-  code span.im { } /* Import */
-  code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-  code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-  code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-  code span.ot { color: #8f5902; } /* Other */
-  code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-  code span.sc { color: #000000; } /* SpecialChar */
-  code span.ss { color: #4e9a06; } /* SpecialString */
-  code span.st { color: #4e9a06; } /* String */
-  code span.va { color: #000000; } /* Variable */
-  code span.vs { color: #4e9a06; } /* VerbatimString */
-  code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
     </style>
 
 
@@ -456,15 +396,15 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Proportional and partial-proportional cumulative ordered logits</h1>
-<h3 class="subtitle">A quick look at polr and vglm</h3>
+<h1 class="title toc-ignore">Ordered logits introduction</h1>
+<h3 class="subtitle">A quick look at <code>polr</code> and <code>vglm</code></h3>
 
 </div>
 
 
-<p>Logistic regression models that want to regress on an <strong>ordinal</strong> dependent variable (think: Likert scale responses, course grades, categories that have a natural sequence, etc.) will use an <strong>ordered logit</strong>. Ordered logits are often run in R using <code>polr</code> in the MASS package, however the <code>vglm</code> function in the VGAM package offers a more advanced suite of options. This tutorial walks through setting up ordered logits with each function.</p>
-<p>First, let’s load in our packages</p>
-<p>For this example, suppose we are interested in the question: What drives farmers’ interest in technology x? We have data on farmers’ education and income, their farm size, as well as their attitudes towards things like earning money, protecting the environment, as well has how connected they are to different information sources. We are interested in the dependent variable: Farmer interest in the technology, scored as not, somewhat, or very (1-3). Let’s inspect this data</p>
+<p>Logistic regression models that regress on an <strong>ordinal</strong> dependent variable (think: Likert scale responses, course grades, categories that have a natural sequence, etc.) will use an <strong>ordered logit</strong>. Ordered logits are often run in R using <code>polr</code> in the MASS package, however the <code>vglm</code> function in the VGAM package offers a more advanced suite of options. This tutorial walks through setting up ordered logits with each function.</p>
+<p>First, let’s load in our packages.</p>
+<p>For this example, suppose we are interested in the question: What drives farmers’ interest in technology x? We have data on farmers’ education and income, their farm size, as well as their attitudes towards things like earning money, protecting the environment, as well has how connected they are to different information sources. We are interested in the dependent variable: Farmer interest in the technology, scored as no interest (None), some interest (Somewhat), or very interested (Very) (1-3). Let’s inspect these data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">head</span>(df)</span></code></pre></div>
 <pre><code>##   interest acres income education econ.value envt.value info.count
 ## 1      Not  4.84     NA        NA       4.33        3.6          1
@@ -475,11 +415,15 @@ $(document).ready(function () {
 ## 6     Very  6.64      2         7       2.00        4.2          5</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Make sure your dependent variable is in the right order</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>df<span class="op">$</span>interest =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>interest, <span class="kw">c</span>(<span class="st">&#39;Not&#39;</span>, <span class="st">&#39;Somewhat&#39;</span>, <span class="st">&#39;Very&#39;</span>))</span></code></pre></div>
-<p><strong>Cumulative logits with polr</strong></p>
-<p>Most ordered logit models, such as those run with the defaults of the <code>polr</code> function, assume a cumulative link function. A cumulative link function looks at the probability of being at one level, compared to all of the levels below them P[Y…]</p>
-<p>Given these</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>polr.model &lt;-<span class="st"> </span><span class="kw">polr</span>(interest <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, <span class="dt">Hess =</span> T)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">summary</span>(polr.model)</span></code></pre></div>
+<p>Note: These data have been inspired by farmer survey data sets, but have simulated values and therefore do not reflect any actual farmers.</p>
+<div id="polr" class="section level3">
+<h3><code>polr</code></h3>
+<p>Most ordered logit models, such as those run with the defaults of the <code>polr</code> function, assume a cumulative link function. A cumulative link function looks at the probability of being at one level, compared to all of the levels below them (e.g. P(Y&gt;=2)). This is the only kind of link function available in <code>polr</code>, which is important to keep in mind when later comparing it to <code>vglm</code>.</p>
+<p>Now, let’s take a look at our model, where we are interested in seeing how farm operator/operation variables, attitudes, and information affect a farmer’s interest in a technology.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>polr.model &lt;-<span class="st"> </span><span class="kw">polr</span>(interest <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>econ.value <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">                     </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, <span class="dt">Hess =</span> T) </span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># We use Hess = T in order to return the Hessian matrix, which allows us to look at the model&#39;s summary</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">summary</span>(polr.model)</span></code></pre></div>
 <pre><code>## Call:
 ## polr(formula = interest ~ acres + income + education + econ.value + 
 ##     envt.value + info.count, data = df, Hess = T)
@@ -501,8 +445,30 @@ $(document).ready(function () {
 ## Residual Deviance: 1002.928 
 ## AIC: 1018.928 
 ## (106 observations deleted due to missingness)</code></pre>
-<p>One assumption of ordered logits that ought to be tested is the proportional odds assumption. What is assumed here is that the slopes from level to level of the dependent variable are relatively similar, allowing us to use only one coefficient per independent variable. The Brant test was developed to test this assumption, and the brant package and function allow us to quickly test this with <code>polr</code> model objects.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">brant</span>(polr.model)</span></code></pre></div>
+<p>The summary of the <code>polr</code> function returns the coefficients, standard errors and t-values. These results indicate that economic attitudes and income are significantly negatively correlated with technology interest, and environmental attitudes and information sources is positively correlated. Ordered logit coefficient values, in their raw form, is their logit value, where the strength of the effect is hard to interpret. Typically, estimates are exponentiated to be read as odds.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>polr.model<span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>##       acres      income   education  econ.value  envt.value  info.count 
+##  0.06972332 -0.18701627 -0.02323590 -0.50213351  0.57937593  0.14728163</code></pre>
+<p>We can also calculate the p-value manually for an easier read of results, and bind it to the summary table.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Save an object as the coefficient table</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>ctable &lt;-<span class="st"> </span><span class="kw">coef</span>(<span class="kw">summary</span>(polr.model))</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># Calculate and store p values</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>p &lt;-<span class="st"> </span><span class="kw">round</span>((<span class="kw">pnorm</span>(<span class="kw">abs</span>(ctable[, <span class="st">&quot;t value&quot;</span>]), <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span>),<span class="dv">3</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># Bind these objects into one table</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>table &lt;-<span class="st"> </span><span class="kw">cbind</span>(ctable, <span class="st">&quot;p value&quot;</span> =<span class="st"> </span>p)</span>
+<span id="cb8-7"><a href="#cb8-7"></a></span>
+<span id="cb8-8"><a href="#cb8-8"></a>table</span></code></pre></div>
+<pre><code>##                     Value Std. Error    t value p value
+## acres          0.06972332 0.06798285  1.0256016   0.305
+## income        -0.18701627 0.07159954 -2.6119757   0.009
+## education     -0.02323590 0.06122978 -0.3794869   0.704
+## econ.value    -0.50213351 0.10715380 -4.6861009   0.000
+## envt.value     0.57937593 0.09664368  5.9949696   0.000
+## info.count     0.14728163 0.03290579  4.4758571   0.000
+## Not|Somewhat  -0.88005549 0.56391926 -1.5606055   0.119
+## Somewhat|Very  1.01204550 0.56681362  1.7854996   0.074</code></pre>
+<p>Before relying too much on these results, however, one assumption of ordered logits that ought to be tested is the proportional odds assumption. What is assumed here is that the slopes from level to level of the dependent variable are relatively similar, allowing us to use only one coefficient per independent variable. The Brant test was developed to test this assumption, and the <code>brant</code> package and function allow us to quickly test this with <code>polr</code> model objects.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">brant</span>(polr.model)</span></code></pre></div>
 <pre><code>## -------------------------------------------- 
 ## Test for X2  df  probability 
 ## -------------------------------------------- 
@@ -524,15 +490,117 @@ $(document).ready(function () {
 ## econ.value 19.1652296  1 1.198772e-05
 ## envt.value  0.9978075  1 3.178416e-01
 ## info.count  1.4554674  1 2.276527e-01</code></pre>
-<p>Based on these outputs, we see that the overall model fails the proportional odds test, and this is particularly driven by economic values.</p>
-<p>We need to run a non-proportional ordered logit, or at least partial proportional model. However, <code>polr</code> doesn’t allow us to do this, which is where we switch to <code>vglm</code>.</p>
-<p><strong>Cumulative logits with vglm</strong></p>
-<p>VGAM can model more advanced ordinal regressions – non-proportional and partial proportional, as well as different link functions. However, it requires a few more model specifications than the <code>polr</code> model. First, you need to specify the family. As noted above, the default family for <code>polr</code> and most people thinking about ordered logits is the cumulative link function, so for now we will leave it at that with <code>family = cumulative</code>. (This blog post explains the cratio link function). We also get to specify whether or not the parallel odds assumption, also called the proportional odds assumption, has been met with <code>parallel = T/F</code>. Last, the default in <code>vglm</code> is to reverse the order of the ordered dependent variable, so most intuitive interpretations require that the order be reversed with <code>reverse = T</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>vgam.model.prop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> T, <span class="dt">reverse =</span> T))</span>
-<span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a>vgam.model.nonprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count,  <span class="dt">data =</span> df, <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F, <span class="dt">reverse =</span> T))</span>
-<span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a>vgam.model.partialprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F <span class="op">~</span><span class="st"> </span>priority_econ, <span class="dt">reverse =</span> T))</span></code></pre></div>
+<p>This test evaluates whether or not the proportional odds assumption has been met, where the null hypothesis is that the assumption has been met. In this case, a p-value &lt; 0.05 is cause to reject the null hypothesis, meaning that reject the proportional odds assumption. Based on these outputs, we see that the overall (Omnibus) model fails the proportional odds test, where probability = 0, and this is particularly driven by economic values, where the p-value is <span class="math inline">\(1.2^{-5}\)</span>.</p>
+<p>A failed proportional odds assumption calls for a non-proportional ordered logit, or at least partial proportional model. However, <code>polr</code> doesn’t allow us to do this, which is where we switch to <code>vglm</code>.</p>
+</div>
+<div id="vglm" class="section level3">
+<h3><code>vglm</code></h3>
+<p>The <code>vglm</code> function can model more advanced ordinal regressions – non-proportional and partial proportional, as well as different link functions. However, it requires a few more model specifications than the <code>polr</code> model. We will explore these using the same data as above.</p>
+<p>First, you need to specify the family of the link function. As noted above, the default family for <code>polr</code> and most people thinking about ordered logits is the cumulative link function, so for now we will leave it at that with <code>family = cumulative</code>. (See my post on the <a href="ol.sequential.html">sequential ordered logit</a> using the <code>cratio</code> link function). We also get to specify whether or not the parallel odds assumption, also called the proportional odds assumption, has been met with <code>parallel = T/F</code>. Last, the default in <code>vglm</code> is to reverse the order of the ordered dependent variable, so most intuitive interpretations require that the order be reversed with <code>reverse = T</code>. Below are examples of running the proportional, non-proportional, and partial proportional models. Note that the partial proportional model is specified by using a <code>~</code> followed by the variable(s) that you want to be left not proportional.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># a proportional model</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>vgam.model.prop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">                         </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>                       <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> T, <span class="dt">reverse =</span> T))</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"># a non-proportional model</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>vgam.model.nonprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">                            </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count,  <span class="dt">data =</span> df, </span>
+<span id="cb13-9"><a href="#cb13-9"></a>                          <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F, <span class="dt">reverse =</span> T))</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co"># a partial proportional model</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>vgam.model.partialprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="st">                                </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
+<span id="cb13-14"><a href="#cb13-14"></a>                              <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F <span class="op">~</span><span class="st"> </span>econ.value, <span class="dt">reverse =</span> T))</span></code></pre></div>
+<p>While <code>polr</code> model objects of the S3 class, as are most objects in R, <code>vglm</code> models are S4. In this case, while some functions operate the same, others vary. For instance, you can use the same <code>summary()</code> function.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># vagm models provide p-values immediately</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">summary</span>(vgam.model.partialprop)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## vglm(formula = ordered(interest) ~ acres + income + education + 
+##     econ.value + envt.value + info.count, family = cumulative(parallel = F ~ 
+##     econ.value, reverse = T), data = df)
+## 
+## Pearson residuals:
+##                       Min      1Q  Median     3Q   Max
+## logitlink(P[Y&gt;=2]) -4.212  0.1114  0.2882 0.6325 2.744
+## logitlink(P[Y&gt;=3]) -2.619 -0.7329 -0.3143 0.7847 3.872
+## 
+## Coefficients: 
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept):1 -0.46902    0.59324  -0.791  0.42918    
+## (Intercept):2 -0.20922    0.57118  -0.366  0.71415    
+## acres          0.06150    0.06709   0.917  0.35934    
+## income        -0.19036    0.07184  -2.650  0.00806 ** 
+## education     -0.01948    0.06099  -0.319  0.74947    
+## econ.value:1  -0.14429    0.11887  -1.214  0.22481    
+## econ.value:2  -0.66601    0.11258  -5.916 3.30e-09 ***
+## envt.value     0.54720    0.09669   5.659 1.52e-08 ***
+## info.count     0.14946    0.03316   4.507 6.57e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Names of linear predictors: logitlink(P[Y&gt;=2]), logitlink(P[Y&gt;=3])
+## 
+## Residual deviance: 982.8936 on 1009 degrees of freedom
+## 
+## Log-likelihood: -491.4468 on 1009 degrees of freedom
+## 
+## Number of Fisher scoring iterations: 8 
+## 
+## No Hauck-Donner effect found in any of the estimates
+## 
+## 
+## Exponentiated coefficients:
+##        acres       income    education econ.value:1 econ.value:2   envt.value   info.count 
+##    1.0634294    0.8266641    0.9807110    0.8656360    0.5137545    1.7284071    1.1612031</code></pre>
+<p>At the bottom of this summary, coefficients are already presented in exponentaited form. Still, it is useful to know how to manipulate this model object to get out the values of interest. In a <code>polr</code> model you can use a $ sign after the model object to get just the coefficients, but in vglm you use the @ sign after the model summary object to pull out a variety of the model parts.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>vgam.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(vgam.model.partialprop)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># coef3 pulls out the whole model output table</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>vgam.summary<span class="op">@</span>coef3</span></code></pre></div>
+<pre><code>##                  Estimate Std. Error    z value     Pr(&gt;|z|)
+## (Intercept):1 -0.46901843 0.59324098 -0.7906036 4.291754e-01
+## (Intercept):2 -0.20922021 0.57118110 -0.3662940 7.141457e-01
+## acres          0.06149894 0.06709280  0.9166250 3.593392e-01
+## income        -0.19035684 0.07184225 -2.6496501 8.057517e-03
+## education     -0.01947749 0.06099434 -0.3193327 7.494742e-01
+## econ.value:1  -0.14429075 0.11887181 -1.2138349 2.248108e-01
+## econ.value:2  -0.66600982 0.11257994 -5.9158837 3.300984e-09
+## envt.value     0.54720023 0.09669496  5.6590357 1.522259e-08
+## info.count     0.14945660 0.03316010  4.5071221 6.571281e-06</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># coefficient pulls out only the coefficients</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>vgam.summary<span class="op">@</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept):1 (Intercept):2         acres        income     education  econ.value:1  econ.value:2    envt.value 
+##   -0.46901843   -0.20922021    0.06149894   -0.19035684   -0.01947749   -0.14429075   -0.66600982    0.54720023 
+##    info.count 
+##    0.14945660</code></pre>
+<p>If you want to neatly compile a table, including exponentiated coefficients, confidence intervals, and p-values, the following code helps compile this.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Calculate exponentiated coefficients (odds) using the model summary object</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>odds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">exp</span>(vgam.summary<span class="op">@</span>coefficients))</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># Extrac p-value</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(vgam.summary<span class="op">@</span>coef3[,<span class="dv">4</span>])</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co"># Calculate the confidence intervals using the original model object</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>ci &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">exp</span>(<span class="kw">confint</span>(vgam.model.partialprop)))</span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co"># Combine and round </span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>vglm.table &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">cbind</span>(odds, ci, p),<span class="dv">3</span>)</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="kw">colnames</span>(vglm.table) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Estimate&quot;</span>, <span class="st">&quot;LCI&quot;</span>, <span class="st">&quot;UCI&quot;</span>, <span class="st">&quot;p-value&quot;</span>)</span>
+<span id="cb20-10"><a href="#cb20-10"></a></span>
+<span id="cb20-11"><a href="#cb20-11"></a>vglm.table</span></code></pre></div>
+<pre><code>##               Estimate   LCI   UCI p-value
+## (Intercept):1    0.626 0.196 2.001   0.429
+## (Intercept):2    0.811 0.265 2.485   0.714
+## acres            1.063 0.932 1.213   0.359
+## income           0.827 0.718 0.952   0.008
+## education        0.981 0.870 1.105   0.749
+## econ.value:1     0.866 0.686 1.093   0.225
+## econ.value:2     0.514 0.412 0.641   0.000
+## envt.value       1.728 1.430 2.089   0.000
+## info.count       1.161 1.088 1.239   0.000</code></pre>
+<p>For more on ordered logit model, see posts on:</p>
+<ul>
+<li><a href="ol.sequential.html">Sequential ordered logit</a></li>
+<li><a href="ol.predictedprobs.html">Predicted probabilities with ordered logits</a></li>
+</ul>
+</div>
 
 
 
@@ -543,7 +611,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

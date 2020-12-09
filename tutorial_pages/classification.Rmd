@@ -1,0 +1,18 @@
+---
+title: "Classification"
+---
+
+Supervised machine learning -- where researchers train algorithms to identify known patterns in order to later detect unknown patterns -- has revolutionized technologies (think, facial recognition).
+
+It can also be useful for basic analyses like data cleaning, coding qualitative data into assigned themes, or even cleaning textual data. For instance in network research, surveys solicit respondents to write down a bunch of names
+
+```{r, echo = F, include = F}
+library(tidyverse)
+```
+
+
+
+```{r}
+#Code coming soon...
+```
+

@@ -1,7 +1,16 @@
 ---
 title: "Tutorials"
+Subtitle: "paying it forward for the hours spent pouring over others' tutorials"
 ---
 
 <br>
-### Statistics
-[Ordered logits: proportional and partial proportional models with polr and vglm](ol.partialprop.html)
+<br>
+<br>
+
+[Ordered logits introduction](ol.partialprop.html)
+<br>
+[Sequential ordered logits](ol.sequential.html)
+<br>
+[Network introduction: comparing `network`, `sna` and `igraph` packages](network.intro.html)
+<br>
+[Web scraping: using `rvest` and base R to scrape and organize a database](tutorial_pages/web_scraping.html)

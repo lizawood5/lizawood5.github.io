@@ -1,0 +1,19 @@
+---
+Title: "Clustering & classification"
+Subtitle: "ifelse(), if() else(), and condition_when()"
+---
+
+Adapted from lessons by [Emily Merchant](http://www.emilyklancher.com/)
+
+**Clustering**
+Clustering does what?
+Euclidian distance cna be measured in any matrix
+Distance is a measure of space -- this can be measured as the distance between two vectors in a matrix, as sqrt(sum((x_i - y_i)^2)).
+Then with these distances calculated, 
+```{r}
+?hclust
+?dist
+```
+
+**Classification**
+Classification is a training, but it is still selecting on soemthing
