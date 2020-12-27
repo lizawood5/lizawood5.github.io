@@ -21,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -31,7 +33,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 
 
@@ -279,6 +281,9 @@ $(document).ready(function () {
 <li>
   <a href="teaching.html">Teaching</a>
 </li>
+<li>
+  <a href="tutorials.html">Tutorials</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -302,12 +307,25 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Tutorials</h1>
+<h1 class="title toc-ignore"><center>
+Tutorials
+</center></h1>
+<h3 class="subtitle"><center>
+paying it forward for the hours spent pouring over others’ tutorials
+</center></h3>
 
 </div>
 
 
-<p><br> ### Statistics <a href="ol.partialprop.html">Ordered logits: proportional and partial proportional models with polr and vglm</a></p>
+<p><br> <br> <br></p>
+<p>###<a href="ol.partialprop.html">Ordered logits introduction with <code>MASS</code> + <code>VGAM</code></a><br />
+A brief introduction to ordered logits using two different packages in R, reviewing the different model specifications and some of the more advances features of the <code>VGAM</code> package, particularly non-proportional and partial proportional models. Example using simulated farmer survey data.</p>
+<p><br> ###<a href="ol.sequential.html">Sequential ordered logits</a><br />
+Advancing on the ordered logit introduction, this provides an overview of the continuation ratio (also called sequential) model to ordered logits that want to analyze a dependent ordinal variable that constitutes sequential stages. Example using simulated farmer survey data.</p>
+<p><br> ###<a href="network.intro.html">Network introduction with <code>network</code> + <code>igraph</code></a><br />
+Digging into the differences in syntax of network packages for descriptives and plotting. This is mainly a comparison of <code>network</code> objects and <code>igraph</code> objects, and the slightly different approaches to working with these data. Example from a Twitter retweet network.</p>
+<p><br> ###<a href="web.scraping.rvest.html">Webscraping with <code>xml2</code> + <code>rvest</code></a><br />
+Reviewing some of the basic functions within <code>xml2</code> and <code>rvest</code> for database scraping, using an example of the National Germplasm Repository database.</p>
 
 
 
@@ -318,7 +336,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

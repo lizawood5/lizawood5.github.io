@@ -10,6 +10,8 @@ navbar:
       href: projects.html
     - text: "Teaching"
       href: teaching.html
+    - text: "Tutorials"
+      href: tutorials.html
    # - text: "Tutorials"
    #  menu:
    #  - text: "Statistics"

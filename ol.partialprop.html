@@ -373,6 +373,9 @@ $(document).ready(function () {
 <li>
   <a href="teaching.html">Teaching</a>
 </li>
+<li>
+  <a href="tutorials.html">Tutorials</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -498,17 +501,17 @@ $(document).ready(function () {
 <p>The <code>vglm</code> function can model more advanced ordinal regressions – non-proportional and partial proportional, as well as different link functions. However, it requires a few more model specifications than the <code>polr</code> model. We will explore these using the same data as above.</p>
 <p>First, you need to specify the family of the link function. As noted above, the default family for <code>polr</code> and most people thinking about ordered logits is the cumulative link function, so for now we will leave it at that with <code>family = cumulative</code>. (See my post on the <a href="ol.sequential.html">sequential ordered logit</a> using the <code>cratio</code> link function). We also get to specify whether or not the parallel odds assumption, also called the proportional odds assumption, has been met with <code>parallel = T/F</code>. Last, the default in <code>vglm</code> is to reverse the order of the ordered dependent variable, so most intuitive interpretations require that the order be reversed with <code>reverse = T</code>. Below are examples of running the proportional, non-proportional, and partial proportional models. Note that the partial proportional model is specified by using a <code>~</code> followed by the variable(s) that you want to be left not proportional.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># a proportional model</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>vgam.model.prop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>vgam.model.prop &lt;-<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="st">                         </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
 <span id="cb13-4"><a href="#cb13-4"></a>                       <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> T, <span class="dt">reverse =</span> T))</span>
 <span id="cb13-5"><a href="#cb13-5"></a></span>
 <span id="cb13-6"><a href="#cb13-6"></a><span class="co"># a non-proportional model</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>vgam.model.nonprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>vgam.model.nonprop &lt;-<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
 <span id="cb13-8"><a href="#cb13-8"></a><span class="st">                            </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count,  <span class="dt">data =</span> df, </span>
 <span id="cb13-9"><a href="#cb13-9"></a>                          <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F, <span class="dt">reverse =</span> T))</span>
 <span id="cb13-10"><a href="#cb13-10"></a></span>
 <span id="cb13-11"><a href="#cb13-11"></a><span class="co"># a partial proportional model</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a>vgam.model.partialprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>vgam.model.partialprop &lt;-<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
 <span id="cb13-13"><a href="#cb13-13"></a><span class="st">                                </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
 <span id="cb13-14"><a href="#cb13-14"></a>                              <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> F <span class="op">~</span><span class="st"> </span>econ.value, <span class="dt">reverse =</span> T))</span></code></pre></div>
 <p>While <code>polr</code> model objects of the S3 class, as are most objects in R, <code>vglm</code> models are S4. In this case, while some functions operate the same, others vary. For instance, you can use the same <code>summary()</code> function.</p>
@@ -569,10 +572,10 @@ $(document).ready(function () {
 ## info.count     0.14945660 0.03316010  4.5071221 6.571281e-06</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># coefficient pulls out only the coefficients</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>vgam.summary<span class="op">@</span>coefficients</span></code></pre></div>
-<pre><code>## (Intercept):1 (Intercept):2         acres        income     education  econ.value:1  econ.value:2    envt.value 
-##   -0.46901843   -0.20922021    0.06149894   -0.19035684   -0.01947749   -0.14429075   -0.66600982    0.54720023 
-##    info.count 
-##    0.14945660</code></pre>
+<pre><code>## (Intercept):1 (Intercept):2         acres        income     education  econ.value:1 
+##   -0.46901843   -0.20922021    0.06149894   -0.19035684   -0.01947749   -0.14429075 
+##  econ.value:2    envt.value    info.count 
+##   -0.66600982    0.54720023    0.14945660</code></pre>
 <p>If you want to neatly compile a table, including exponentiated coefficients, confidence intervals, and p-values, the following code helps compile this.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Calculate exponentiated coefficients (odds) using the model summary object</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a>odds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">exp</span>(vgam.summary<span class="op">@</span>coefficients))</span>

@@ -11,7 +11,7 @@
 
 
 
-<title>ol.sequential.utf8</title>
+<title>Ordereg logit intro</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -373,6 +373,9 @@ $(document).ready(function () {
 <li>
   <a href="teaching.html">Teaching</a>
 </li>
+<li>
+  <a href="tutorials.html">Tutorials</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -396,20 +399,161 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore"><center>
+Ordered Logits – Proportional and non-proportional sequential models
+</center></h1>
+<h3 class="subtitle"><center>
+Digging deeper in <code>vglm()</code>
+</center></h3>
 
 </div>
 
 
-<p>To generate predicted probabilities, create a data frame from your original data for all of the independent variables. One quick way of creating profiles it to set all independent variables to their median, except for one which can be represented across its range of values. In our case, we will hold all else constant except for economic values.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pp_df =<span class="st"> </span><span class="kw">with</span>(df, <span class="kw">data.frame</span>(<span class="dt">acres =</span> <span class="kw">median</span>(acres, <span class="dt">na.rm =</span> T), <span class="dt">income =</span> <span class="kw">median</span>(income, <span class="dt">na.rm =</span> T), <span class="dt">education =</span> <span class="kw">median</span>(education, <span class="dt">na.rm =</span> T), <span class="dt">econ.value =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>), <span class="dt">envt.value =</span> <span class="kw">median</span>(envt.value, <span class="dt">na.rm =</span> T), <span class="dt">info.count =</span> <span class="kw">median</span>(info.count, <span class="dt">na.rm =</span> T)))</span></code></pre></div>
-<p>The beauty of the <code>polr</code> model is that it is compatible with the “prob” type in the <code>predict</code> function to automatically generate predicted probabilities for the profiles defined in the previous dataframe creation.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>pp &lt;-<span class="st"> </span><span class="kw">cbind</span>(pp_df, <span class="kw">predict</span>(polr.model, <span class="dt">newdata =</span> pp_df, <span class="dt">type =</span> <span class="st">&quot;prob&quot;</span>, <span class="dt">se.fit =</span> T)); pp</span></code></pre></div>
-<pre><code>##   acres income education econ.value envt.value info.count        Not  Somewhat      Very
-## 1  4.11      3         6          1        4.2          3 0.05523996 0.2242197 0.7205403
-## 2  4.11      3         6          2        4.2          3 0.08809573 0.3024521 0.6094521
-## 3  4.11      3         6          3        4.2          3 0.13764639 0.3766306 0.4857230
-## 4  4.11      3         6          4        4.2          3 0.20868934 0.4275913 0.3637194
-## 5  4.11      3         6          5        4.2          3 0.30349489 0.4394613 0.2570438</code></pre>
+<p>In a <a href="ol.partialprop.html">previous tutorial</a> I went over two packages for ordered logits – <code>polr()</code> and <code>vglm()</code> – and walked through some of the basics for running models in both. In those models I focused on more classical cumulative ratio models, but now I am going to introduce continuation ratio models, also called a sequential model. A good review can be found in Chapters 4 and 5 of O’Connell’s <a href="https://www.google.com/books/edition/Logistic_Regression_Models_for_Ordinal_R/yMiSDwAAQBAJ?hl=en&amp;gbpv=0">Logistic Regression Models for Ordinal Response Variables</a>. In short though, the added value is this: Unlike the more common cumulative ordered logistic regression (i.e. ordered logit), where the model is estimating the likelihood of being at or above a certain category (e.g. P(Y&gt;=2)), a sequential logit evaluates the likelihood of being in a particular level against the likelihood of being in the level just below it (e.g. P[Y&gt;2|Y&gt;=2]).</p>
+<p>Let’s see how we can run this models using the <code>VGAM</code> package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(VGAM) </span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<p>I’ll be using the same data set described in the previous tutorial, farmer interest in adopting a new technology.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   interest acres income education econ.value envt.value info.count
+## 1      Not  4.84     NA        NA       4.33        3.6          1
+## 2 Somewhat  3.01      1         5       4.00        3.0          1
+## 3 Somewhat  4.17      3         2         NA         NA          1
+## 4     &lt;NA&gt;  4.40      3         3       5.00         NA          3
+## 5      Not  2.44      4         7       4.67        3.6          9
+## 6     Very  6.64      2         7       2.00        4.2          5</code></pre>
+<p>If we wanted to run a more classic, cumulative model, the model specifications would be as follows, namely specifying our family as “cumulative”. Note we are also specifying that parallel = T for now, indicating that we assume that the slopes between stages are parallel, and that we reverse the order of our stages because <code>vglm()</code> oddly defaults to descending order.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>cumltv.model &lt;-<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">                         </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>                       <span class="dt">family=</span><span class="kw">cumulative</span>(<span class="dt">parallel =</span> T, <span class="dt">reverse =</span> T))</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">summary</span>(cumltv.model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## vglm(formula = ordered(interest) ~ acres + income + education + 
+##     econ.value + envt.value + info.count, family = cumulative(parallel = T, 
+##     reverse = T), data = df)
+## 
+## Pearson residuals:
+##                       Min       1Q  Median     3Q   Max
+## logitlink(P[Y&gt;=2]) -5.097  0.09018  0.2839 0.6702 1.963
+## logitlink(P[Y&gt;=3]) -1.739 -0.78868 -0.3158 0.8399 3.762
+## 
+## Coefficients: 
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept):1  0.88002    0.54529   1.614  0.10656    
+## (Intercept):2 -1.01208    0.54711  -1.850  0.06433 .  
+## acres          0.06972    0.06660   1.047  0.29517    
+## income        -0.18702    0.07119  -2.627  0.00861 ** 
+## education     -0.02324    0.06035  -0.385  0.70024    
+## econ.value    -0.50212    0.10343  -4.855 1.20e-06 ***
+## envt.value     0.57938    0.09616   6.025 1.69e-09 ***
+## info.count     0.14728    0.03288   4.479 7.51e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Names of linear predictors: logitlink(P[Y&gt;=2]), logitlink(P[Y&gt;=3])
+## 
+## Residual deviance: 1002.928 on 1010 degrees of freedom
+## 
+## Log-likelihood: -501.4641 on 1010 degrees of freedom
+## 
+## Number of Fisher scoring iterations: 5 
+## 
+## No Hauck-Donner effect found in any of the estimates
+## 
+## 
+## Exponentiated coefficients:
+##      acres     income  education econ.value envt.value info.count 
+##  1.0722115  0.8294304  0.9770324  0.6052435  1.7849227  1.1586799</code></pre>
+<p>The switch to the sequential model takes just a change in the family, now specifying it as “cratio”, and no longer reversing the order.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>seqntl.model &lt;-<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">                         </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>                       <span class="dt">family=</span><span class="kw">cratio</span>(<span class="dt">parallel =</span> T))</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">summary</span>(seqntl.model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## vglm(formula = ordered(interest) ~ acres + income + education + 
+##     econ.value + envt.value + info.count, family = cratio(parallel = T), 
+##     data = df)
+## 
+## Pearson residuals:
+##                           Min      1Q    Median     3Q   Max
+## logitlink(P[Y&gt;1|Y&gt;=1]) -4.724  0.1494 4.453e-01 0.6024 1.534
+## logitlink(P[Y&gt;2|Y&gt;=2]) -1.911 -0.9215 1.876e-05 0.7599 4.276
+## 
+## Coefficients: 
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept):1  1.11877    0.49400   2.265   0.0235 *  
+## (Intercept):2 -0.28988    0.49660  -0.584   0.5594    
+## acres          0.05510    0.05989   0.920   0.3576    
+## income        -0.16453    0.06407  -2.568   0.0102 *  
+## education     -0.03270    0.05432  -0.602   0.5472    
+## econ.value    -0.46247    0.09476  -4.881 1.06e-06 ***
+## envt.value     0.49286    0.08635   5.708 1.14e-08 ***
+## info.count     0.13283    0.03000   4.427 9.54e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Names of linear predictors: logitlink(P[Y&gt;1|Y&gt;=1]), logitlink(P[Y&gt;2|Y&gt;=2])
+## 
+## Residual deviance: 1004.007 on 1010 degrees of freedom
+## 
+## Log-likelihood: -502.0035 on 1010 degrees of freedom
+## 
+## Number of Fisher scoring iterations: 5 
+## 
+## No Hauck-Donner effect found in any of the estimates</code></pre>
+<p>Here we see that the results between the two models are quite similar, though the effect sizes are slightly smaller in the sequential model with less significance. The main difference is in the conditions of the linear predictors (as noted above). Deciding which family of ordered logits is right for your model may depend on model fit, or perhaps theoretically with the nature of the variable. If you believe that the stages you are evaluating are predicated on going through the previous stage, then a sequential model might be for you.</p>
+<p>Also important to note in <code>vglm()</code> is that we cannot rely on the <code>brant()</code> function as we can with <code>polr</code> models. So, testing our proportional odds assumption (that is, the assumption that parallel = T), takes a bit of manual work. Let’s first specify the model without making the proportional odds assumption.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>seqntl.model.nonprop =<span class="st"> </span><span class="kw">vglm</span>(<span class="kw">ordered</span>(interest) <span class="op">~</span><span class="st"> </span>acres <span class="op">+</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">                         </span>econ.value <span class="op">+</span><span class="st"> </span>envt.value <span class="op">+</span><span class="st"> </span>info.count, <span class="dt">data =</span> df, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>                          <span class="dt">family=</span><span class="kw">cratio</span>(<span class="dt">parallel =</span> F))</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">summary</span>(seqntl.model.nonprop)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## vglm(formula = ordered(interest) ~ acres + income + education + 
+##     econ.value + envt.value + info.count, family = cratio(parallel = F), 
+##     data = df)
+## 
+## Pearson residuals:
+##                           Min      1Q     Median     3Q   Max
+## logitlink(P[Y&gt;1|Y&gt;=1]) -3.599  0.1873  4.180e-01 0.5650 1.996
+## logitlink(P[Y&gt;2|Y&gt;=2]) -2.795 -0.8469 -7.198e-06 0.6945 3.411
+## 
+## Coefficients: 
+##                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept):1 -0.883092   0.662736  -1.332 0.182698    
+## (Intercept):2  2.230679   0.792002   2.817 0.004855 ** 
+## acres:1        0.093624   0.085864   1.090 0.275547    
+## acres:2        0.006717   0.086027   0.078 0.937768    
+## income:1      -0.223318   0.093201  -2.396 0.016572 *  
+## income:2      -0.109974   0.091128  -1.207 0.227502    
+## education:1    0.029837   0.076562   0.390 0.696746    
+## education:2   -0.092454   0.079330  -1.165 0.243841    
+## econ.value:1  -0.154035   0.129175  -1.192 0.233081    
+## econ.value:2  -0.767367   0.144987  -5.293 1.21e-07 ***
+## envt.value:1   0.633108   0.114018   5.553 2.81e-08 ***
+## envt.value:2   0.248064   0.138626   1.789 0.073543 .  
+## info.count:1   0.110310   0.045887   2.404 0.016220 *  
+## info.count:2   0.153613   0.040627   3.781 0.000156 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Names of linear predictors: logitlink(P[Y&gt;1|Y&gt;=1]), logitlink(P[Y&gt;2|Y&gt;=2])
+## 
+## Residual deviance: 980.3759 on 1004 degrees of freedom
+## 
+## Log-likelihood: -490.188 on 1004 degrees of freedom
+## 
+## Number of Fisher scoring iterations: 5 
+## 
+## No Hauck-Donner effect found in any of the estimates</code></pre>
+<p>A first good sign is that we did not encounter any errors. In some cases, <code>vglm()</code> cannot fit the non-proportional model if it really isn’t suited. If the model runs, however, we still want to check the assumption. Below is a method for testing whether or not the model overall meets the assumption (though it does not provide p-values for specific variables). We calculate the p-value against the hypothesis that the proportion odds assumption is correct.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>dev &lt;-<span class="st"> </span><span class="kw">deviance</span>(seqntl.model) <span class="op">-</span><span class="st"> </span><span class="kw">deviance</span>(seqntl.model.nonprop)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>degf &lt;-<span class="st"> </span>seqntl.model<span class="op">@</span>df.residual <span class="op">-</span><span class="st"> </span>seqntl.model.nonprop<span class="op">@</span>df.residual</span>
+<span id="cb10-3"><a href="#cb10-3"></a>p.value &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(<span class="dt">q =</span> dev , <span class="dt">df =</span> degf)</span>
+<span id="cb10-4"><a href="#cb10-4"></a>p.value</span></code></pre></div>
+<pre><code>## [1] 0.0006104421</code></pre>
 
 
 

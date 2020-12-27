@@ -1,0 +1,4 @@
+---
+Title: "filter vs. grep vs. stringr"
+Subtitle: "Playing with text data"
+---

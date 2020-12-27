@@ -1,0 +1,30 @@
+---
+Title: "Conditional statement functions"
+Subtitle: "Comparing ifelse(), if() else(), and condition_when()"
+---
+
+Let's say I want to create some new columns based on a series of conditional statements about my existing data. I have used three main approaches: ifelse(), if else, and case_when(). I'll use a toy example to give some of the pros and cons.
+
+**ifelse()**
+
+```{r}
+
+  Author <- ifelse(is.na(df$Author), 
+                      str_extract(df$Journal, "(?<=[Pp]repared\\s[Bb]y\\st?h?e?).*"), 
+                      df$Author)
+  Publisher <- ifelse(!is.na(df$Author) & is.na(df$Publisher), 
+                 str_extract(df$Journal, "(?<=[Pp]repared\\s[Bb]y\\s[a-z+]?).*"), 
+                 df$Publisher)
+  Journal <- ifelse(!is.na(df$Author) & !is.na(df$Publisher & is.na(df$Journal)
+                      str_extract(df$Journal[i], "(?<=[Pp]repared\\s[Bb]y\\s[a-z+]?).*"), 
+                      df$Journal[i])
+  temp.df <- cbind(Author, Publisher, Journal, i)
+  new.df <- rbind(temp.df, new.df)
+}
+```
+
+
+
+**if else, else if, else**
+
+**case_when()**

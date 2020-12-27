@@ -1,8 +1,0 @@
----
-Title: "Network intermediate"
-Subtitle: "Exploring Twitter network community detection and statistical tests"
----
-
-Community detection
-
-Block Models

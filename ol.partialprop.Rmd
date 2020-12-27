@@ -88,17 +88,17 @@ First, you need to specify the family of the link function. As noted above, the 
 
 ```{r, warning=F, error=F}
 # a proportional model
-vgam.model.prop = vglm(ordered(interest) ~ acres + income + education + 
+vgam.model.prop <- vglm(ordered(interest) ~ acres + income + education + 
                          econ.value + envt.value + info.count, data = df, 
                        family=cumulative(parallel = T, reverse = T))
 
 # a non-proportional model
-vgam.model.nonprop = vglm(ordered(interest) ~ acres + income + education + 
+vgam.model.nonprop <- vglm(ordered(interest) ~ acres + income + education + 
                             econ.value + envt.value + info.count,  data = df, 
                           family=cumulative(parallel = F, reverse = T))
 
 # a partial proportional model
-vgam.model.partialprop = vglm(ordered(interest) ~ acres + income + education + 
+vgam.model.partialprop <- vglm(ordered(interest) ~ acres + income + education + 
                                 econ.value + envt.value + info.count, data = df, 
                               family=cumulative(parallel = F ~ econ.value, reverse = T))
 ```

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Easy web scraping</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.13/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Liza Wood</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="tutorials.html">Tutorials</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="http://github.com/lizawood5">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/wood__liza">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Easy web scraping</h1>
+<h3 class="subtitle">Some <code>xml2</code> and <code>rvest</code> basics</h3>
+
+</div>
+
+
+<div id="scraping-overview" class="section level2">
+<h2>Scraping overview</h2>
+<p>Approaches to web scraping can range from pretty advanced (e.g. crawling through webpages with a headless browser like <a href="https://cran.r-project.org/web/packages/RSelenium/vignettes/basics.html">RSelenium</a>), to pretty basic but effective point and click browser extensions like <a href="https://webscraper.io/">Web Scraper</a>. Here I am going to review a middle of the road effort for pulling information from a database using <code>xml2</code> and <code>rvest</code>.</p>
+<p>To test these out, let’s say we want to know all of the accessions in the <a href="https://npgsweb.ars-grin.gov/gringlobal/search">Germplasm Repository Information Network (GRIN)</a> – a database of plant germplasm hosted by the USDA. Like many databases, this repository houses data on tens of thousands of plant accessions, but does not provide the raw data used to populate this database. So, we can get it ourselves.</p>
+<p>First, let’s load in the packages we will need – <code>rvest</code> combined with <code>xml2</code> will be the workhorses here, and <code>stringr</code> will help us work with the text data from the website, along with some others.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(xml2)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+Next, a short overview of some of the main functions in <code>xml2</code>. First, <code>read_html()</code> takes the URL of a website of interest and grabs all of the HTML code associated with it. When stored as an object, it will be a list, usually of 2, representing the webpage’s
+<head>
+and
+<body>
+<p>, and nested within those items will be everything within the website. In fact, this list should mirror the HTML one can read when exploring the HTML of a webpage in the browser by using Cmd+Opt+i.</p>
+<p>Below, I won’t start with the search webpage of GRIN, but of one particular accession from which we will model our scraping from: a chickpea variety currently in the system, <em>Cicer arietinum L.</em>, and one other to check that our scraping code will be consistent across accessions: a legume, <em>Helicotropis stenoloba</em>, which has historical data in the system.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>html.chickpea &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1022773&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>html.legume &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1020746&quot;</span>)</span></code></pre></div>
+<p>By using <code>read_html()</code>, we have all of the information from the page, but we’ll want to narrow it since everything is currently deeply nested in the code and basically un-usable. So, we will explore the <code>html_nodes()</code> and <code>html_text()</code> series in <code>rvest</code>, both of which pick out pieces of HTML documents using XPath and/or CSS selectors. For <code>html_nodes()</code> the arguments include the object to inspect (which can be a full HTML document or smaller nodes), and either the Xpath or CSS selector to extract particular kinds of information. For the <code>html_text()</code> series of functions, including <code>html_children()</code> and <code>html_attrs()</code>, you are specifying a desired attribute of the code, rather than an XPath or CSS object, that you want to extract. In the case of <code>html_text()</code>, the text attribute is already specified so you only need to include the object. For <code>html_children()</code>, it will convert the given object into an indexed list, allowing you to specify which part of the list to extract using indexing.</p>
+</div>
+<div id="extracting-webpage-components" class="section level2">
+<h2>Extracting webpage components</h2>
+<p>Now let’s dig in. Let’s say we want to generally extract all of the information from the tabs of the accession page.</p>
+<p>First, how do you get a CSS selector or Xpath? Widely recommended is <a href="http://selectorgadget.com/">Selector Gadget</a>, a web extension tool that allows you to point and click to get the paths easily. Let’s see what this will look like on our page.</p>
+<p>Here we open the extension (the small bar in the middle right of the screen) and click to the objects on the webpage that we are interested in (Note I also have the HTML elements open using Cmd+Opt+i at the bottom of the page, but this isn’t necessary). I’ve clicked on the overall content of the page I want, and Selector Gadget automatically chooses the items it thinks compatible with your selection, turning them green and/or yellow. If it selects objects beyond what you want, you can click on them to un-select. The Selector Gadget bar will indicate how many objects the selector includes (in the case below, 1), and provide the CSS selector by default, which can be copied for use in your code.</p>
+<div class="figure">
+<img src="img/selector.pngv=400x" alt="" />
+<p class="caption">Selector gadget</p>
+</div>
+<p>If you want the Xpath, you just need to click on that button and the Xpath should pop up in a separate window.</p>
+<p><img src="img/xpath.png%20=250x" alt="Xpath" /> Now, we can use this information in <code>html_nodes()</code>. Note that these functions work within pipes, which I prefer for readability. So, we can extract the whole of the content of interest, using the Xpath we identified above.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>content &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">&quot;//*[@id=&#39;nav-tabContent&#39;]&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>content</span></code></pre></div>
+<pre><code>## {xml_nodeset (1)}
+## [1] &lt;div class=&quot;tab-content&quot; style=&quot;padding-top: 20px&quot; id=&quot;nav-tabContent&quot;&gt;\r\n            &lt;di ...</code></pre>
+<p>It doesn’t look like much yet, but we have no isolated the div where all the good information is housed. We could then index what is within content’s components. Now we see that the content from above has been broken down into 7 subcategories.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>content.children &lt;-<span class="st"> </span><span class="kw">html_children</span>(content)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>content.children</span></code></pre></div>
+<pre><code>## {xml_nodeset (7)}
+## [1] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane show active&quot; id=&quot;summary&quot; aria-labelledby=&quot;summary-ta ...
+## [2] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;passport&quot; aria-labelledby=&quot;passport-tab&quot;&gt;\r\n    ...
+## [3] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;taxon&quot;&gt;\r\n                &lt;div class=&quot;row&quot;&gt;\r\n ...
+## [4] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;other&quot; aria-labelledby=&quot;other-tab&quot;&gt;\r\n          ...
+## [5] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;pedigree&quot; aria-labelledby=&quot;pedigree-tab&quot;&gt;\r\n    ...
+## [6] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;IPR&quot; aria-labelledby=&quot;IPR-tab&quot;&gt;\r\n              ...
+## [7] &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;observation&quot; aria-labelledby=&quot;observation-tab&quot;&gt;\ ...</code></pre>
+<p>Exploring each of these indices, we can use subsetting brackets to isolate components of the list, which match the tabs of the website. For the sake of this exercise, let’s just take a look at one of the tabs.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>passport &lt;-<span class="st"> </span>content.children[[<span class="dv">2</span>]] </span>
+<span id="cb7-2"><a href="#cb7-2"></a>passport</span></code></pre></div>
+<pre><code>## {html_node}
+## &lt;div role=&quot;tabpanel&quot; class=&quot;tab-pane&quot; id=&quot;passport&quot; aria-labelledby=&quot;passport-tab&quot;&gt;
+## [1] &lt;div class=&quot;row&quot;&gt;\r\n                    &lt;div class=&quot;col-md-6&quot;&gt;\r\n                        ...</code></pre>
+<p>Still, these don’t give us much, either being read as a list, and if printed with <code>html_text()</code> we get a long string with plenty of spaces and breaks.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">html_text</span>(passport)</span></code></pre></div>
+<pre><code>## [1] &quot;\r\n                \r\n                    \r\n                        \r\n  \r\n                                \r\n                                       \r\n                                    Core Passport Data\r\n                                \r\n                                \r\n                                    \r\n                                        Taxonomy:\r\n                                        \r\n                                            Cicer arietinum L. \r\n                                    \r\n                                    \r\n                                        Top Name:\r\n                                        \r\n                                            ILC 2546\r\n                                    \r\n                                    \r\n                                    \r\n                                        Origin:\r\n                                        \r\n                                            Donated – \r\n                                    \r\n                                    \r\n                                        Maintained:\r\n                                        \r\n                                            Western Regional PI Station\r\n                                    \r\n                                    \r\n                                        Received by NPGS:\r\n                                        \r\n                                            22 Nov 1989\r\n                                    \r\n                                     \r\n                                    \r\n                                        Improvement Status:\r\n                                        \r\n                                            Cultivated material\r\n                                    \r\n                                    \r\n                                   \r\n                                     \r\n                                        Form Received:\r\n                                        \r\n                                            Seed\r\n                                    \r\n                                    \r\n                                    \r\n                                    \r\n                                \r\n                            \r\n                        \r\n\r\n    \r\n        Source History   \r\n                  \r\n    \r\n        \r\n         \r\n         \r\n\t\r\n          Donated\r\n            \r\n                    \r\n                        \r\n                \r\n                22 November 1989. \r\n                    Donator(s): Kaiser, Walter J. USDA, ARS\r\n                    \r\n           \r\n\r\n    \r\n\r\n\r\n                    \r\n                    \r\n                        \r\n\r\n    \r\n        Accession Names and Identifiers\r\n    \r\n    \r\n        \r\n            \r\n                 \r\n                        \r\n                         \r\n                            ILC 2546\r\n                        \r\n                          \r\n                              \r\n                              Type: CGIAR International Center Identifier\r\n                          \r\n                          \r\n                              \r\n                              Group: ICARDA\r\n                            \r\n                         \r\n                              \r\n                              International Center for Agr. Res. in the Dry Areas\r\n                           \r\n                           \r\n                          \r\n            \r\n                \r\n                        \r\n                         \r\n                            W6 2975\r\n                        \r\n                          \r\n                              \r\n                              Type: Site identifier\r\n                          \r\n                         \r\n                              \r\n                              Group: W6\r\n                            \r\n                         \r\n                              \r\n                              Western Regional Plant Introduction (W6) accession numbers\r\n                           \r\n                          \r\n                              \r\n                                USDA-ARS, Western Regional Plant Introduction Station \r\n                            \r\n                          \r\n        \r\n       \r\n\r\n                        \r\n\r\n    \r\n        Narrative\r\n    \r\n    \r\n        \r\n    \r\n\r\n\r\n                    \r\n                \r\n            &quot;</code></pre>
+<p>But, we can use <code>stringr</code> to help clean this up. We can nest the text reading within a series of pattern removals, pattern replacements (replacing 2 or more spaces with a single space), and generic trimming of white space to isolate text.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>patterns.remove =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">n|</span><span class="ch">\\</span><span class="st">r|</span><span class="ch">\\</span><span class="st">t&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>passport.text &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">str_replace_all</span>(<span class="kw">str_remove_all</span>(<span class="kw">html_text</span>(passport), patterns.remove), <span class="st">&quot;</span><span class="ch">\\</span><span class="st">s{2,}&quot;</span>, <span class="st">&quot; &quot;</span>))</span>
+<span id="cb11-3"><a href="#cb11-3"></a>passport.text</span></code></pre></div>
+<pre><code>## [1] &quot;Core Passport Data Taxonomy: Cicer arietinum L. Top Name: ILC 2546 Origin: Donated – Maintained: Western Regional PI Station Received by NPGS: 22 Nov 1989 Improvement Status: Cultivated material Form Received: Seed Source History Donated 22 November 1989. Donator(s): Kaiser, Walter J. USDA, ARS Accession Names and Identifiers ILC 2546 Type: CGIAR International Center Identifier Group: ICARDA International Center for Agr. Res. in the Dry Areas W6 2975 Type: Site identifier Group: W6 Western Regional Plant Introduction (W6) accession numbers USDA-ARS, Western Regional Plant Introduction Station Narrative&quot;</code></pre>
+<p>However, this is still a slog, and returns a bunch of text that would need waded through. Additionally, further refining this list through continued indexing may not apply well across accessions, because we are specifying an indexed location that could change depending on the information available in each page. While this larger-scale text extraction is useful in some scenarios, it isn’t the best suited for this go. So, we can also use more specific CSS or Xpaths to get you where you want to be, and these are more transferable across examples.</p>
+</div>
+<div id="extraction-round-2" class="section level2">
+<h2>Extraction, round 2</h2>
+<p>Again, let’s just get some of the information from the passport section. This time I have used Selector Gadget to identify the more specific components – which we can tell from the more specific names. Also in this round I am using CSS selectors instead of Xpaths (it saves me a click and is a little less fussy given CSS paths don’t use quotation marks). Here are the paths of some components of interest in the passport tab.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>taxonomy &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblTaxon a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb13-3"><a href="#cb13-3"></a>top.name &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblTopName&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb13-5"><a href="#cb13-5"></a>maintained &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblSite a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb13-7"><a href="#cb13-7"></a>received &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblReceived&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb13-9"><a href="#cb13-9"></a>status &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblStatus&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb13-11"><a href="#cb13-11"></a>backup &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblBackup a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span></code></pre></div>
+<p>Let’s combine these components into a data table and have a look.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.table</span>(taxonomy, top.name, maintained, received, status, backup)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##               taxonomy top.name                  maintained    received              status
+## 1: Cicer arietinum L.  ILC 2546 Western Regional PI Station 22 Nov 1989 Cultivated material
+##                                                    backup
+## 1: National Laboratory for Genetic Resources Preservation</code></pre>
+<p>Now, before iterating this on thousands of accessions, it is worth testing it out on a few different examples to see how receptive these functions are to CSS paths that might not be present on other pages. So, can we duplicate this process with the legume accession?</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>taxonomy &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblTaxon a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-3"><a href="#cb16-3"></a>top.name &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblTopName&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-5"><a href="#cb16-5"></a>maintained &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblSite a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-7"><a href="#cb16-7"></a>received &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblReceived&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-9"><a href="#cb16-9"></a>status &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblStatus&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-11"><a href="#cb16-11"></a>backup &lt;-<span class="st"> </span>html.legume <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;#MainContent_ctrlSum_lblBackup a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb16-13"><a href="#cb16-13"></a></span>
+<span id="cb16-14"><a href="#cb16-14"></a>df &lt;-<span class="st"> </span><span class="kw">data.table</span>(taxonomy, top.name, maintained, received, status, backup)</span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##                                        taxonomy top.name maintained    received        status
+## 1: Helicotropis stenoloba (Standl.) A. Delgado      2981       &lt;NA&gt; 01 Jan 1989 Wild material
+##    backup
+## 1:   &lt;NA&gt;</code></pre>
+<p>It looks like it, even though there are some attributes that don’t have any values in this webpage. Note that <code>data.table()</code> is superior here because it will repeat information across rows if columns are differing lengths, and automatically fill a column with NAs if length is 0, whereas <code>data.frame()</code> will not.</p>
+</div>
+<div id="repeating-accross-multiple-accession-ids" class="section level2">
+<h2>Repeating accross multiple accession IDs</h2>
+<p>Okay, now this code seems relatively ready to repeat across a large number of accession. The trick with this database, among many others, it that it can be challenging to know how many accessions there are, and what their URLs are. The GRIN database only lets you search for a certain number of items, given certain search terms. While there are more advanced ways around this, this is a somewhat cheap and easy route that I’ll share here.</p>
+<p>We notice that the URLs for our example accessions are nearly the same, it is just the accession ID number that changes. From what we can tell, this is a 7 digit ID number and we can play around in the site to see a general range. Now, to be sure that you have extracted the whole database, one could run through <strong>all</strong> conceivable numbers, which would likely take an undesirable amount of computational time. But alternatively, you could define a generally wide range that seems right and go with that. Is it elegant? Not really. But does it accomplish the goal? Yes.</p>
+<p>But, instead of the tens of thousands of accessions that are likely in this database, let’s give it a shot with just 150 accession IDs. First, we can create a “base” URL which is the part of the URL that is shared across all pages. Next we can generate our range of IDs, which for now we will make between 1020001 and 1020250.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>base &lt;-<span class="st"> &quot;https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>ids &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1020001</span>, <span class="dv">1020150</span>)</span></code></pre></div>
+<p>Then we can set up the string of CSS/Xpath selectors for easier looping.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>css.text &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#MainContent_ctrlSum_lblTaxon a&quot;</span>, </span>
+<span id="cb19-2"><a href="#cb19-2"></a>              <span class="st">&quot;#MainContent_ctrlSum_lblTopName&quot;</span>, </span>
+<span id="cb19-3"><a href="#cb19-3"></a>              <span class="st">&quot;#MainContent_ctrlSum_lblSite a&quot;</span>, </span>
+<span id="cb19-4"><a href="#cb19-4"></a>              <span class="st">&quot;#MainContent_ctrlSum_lblReceived&quot;</span>, </span>
+<span id="cb19-5"><a href="#cb19-5"></a>              <span class="st">&quot;#MainContent_ctrlSum_lblStatus&quot;</span>, </span>
+<span id="cb19-6"><a href="#cb19-6"></a>              <span class="st">&quot;#MainContent_ctrlSum_lblBackup a&quot;</span>)</span></code></pre></div>
+<p>And last, set up our for loop to run through each webpage. This iteration includes 2 loops, one running through each accession IDs’ webpage (i) and the second running through each selector (j). So for every accession ID, we will paste that to our base URL and read in the HTML. Then within each HTML, we will run through each CSS selector for the text we want and assign it into a list. While we could repeat the same concept as earlier (assigning each bit of text as an object and then combining them into a data.table), this process can really slow down the loop. So, we will assign each bit of text to a list, then unlist while making sure that we maintain the text elements that are empty, and transposing them. Combined with the accession, we have our final data table with all of our results. (Note: This loop takes about 10 minutes)</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>total.DT &lt;-<span class="st"> </span><span class="kw">data.table</span>()</span>
+<span id="cb20-2"><a href="#cb20-2"></a>text.l &lt;-<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="cf">for</span>(i <span class="cf">in</span> ids){</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  url &lt;-<span class="st"> </span><span class="kw">tryCatch</span>(<span class="kw">read_html</span>(<span class="kw">paste0</span>(base, i)),<span class="dt">error =</span> <span class="cf">function</span>(e) <span class="ot">NULL</span>)</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="cf">for</span>(j <span class="cf">in</span> css.text){</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    text.l[[j]] &lt;-<span class="st"> </span>url <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="st">      </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> j) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="st">      </span><span class="kw">html_text</span>() </span>
+<span id="cb20-10"><a href="#cb20-10"></a>    }</span>
+<span id="cb20-11"><a href="#cb20-11"></a>  unlisted.text &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="kw">t</span>(<span class="kw">data.table</span>(<span class="kw">unlist</span>(<span class="kw">lapply</span>(text.l, <span class="cf">function</span>(x) </span>
+<span id="cb20-12"><a href="#cb20-12"></a>    <span class="cf">if</span>(<span class="kw">identical</span>(x,<span class="kw">character</span>(<span class="dv">0</span>))) <span class="st">&#39; &#39;</span> <span class="cf">else</span> x)))))</span>
+<span id="cb20-13"><a href="#cb20-13"></a>  accession &lt;-<span class="st"> </span>i</span>
+<span id="cb20-14"><a href="#cb20-14"></a>  DT &lt;-<span class="st"> </span><span class="kw">cbind</span>(accession, unlisted.text)</span>
+<span id="cb20-15"><a href="#cb20-15"></a>  total.DT &lt;-<span class="st"> </span><span class="kw">rbind</span>(total.DT, DT)</span>
+<span id="cb20-16"><a href="#cb20-16"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17"></a></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="kw">colnames</span>(total.DT) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Accession&quot;</span>, <span class="st">&quot;Taxonomic name&quot;</span>, <span class="st">&quot;Code name&quot;</span>, <span class="st">&quot;Maintenance location&quot;</span>, <span class="st">&quot;Received&quot;</span>, <span class="st">&quot;Status&quot;</span>, <span class="st">&quot;Backup location&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>DT<span class="op">::</span><span class="kw">datatable</span>(total.DT, <span class="dt">rownames =</span> F)</span></code></pre></div>
+<div id="htmlwidget-e95b3e84f65136f7077c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e95b3e84f65136f7077c">{"x":{"filter":"none","data":[[1020001,1020002,1020003,1020004,1020005,1020006,1020007,1020008,1020009,1020010,1020011,1020012,1020013,1020014,1020015,1020016,1020017,1020018,1020019,1020020,1020021,1020022,1020023,1020024,1020025,1020026,1020027,1020028,1020029,1020030,1020031,1020032,1020033,1020034,1020035,1020036,1020037,1020038,1020039,1020040,1020041,1020042,1020043,1020044,1020045,1020046,1020047,1020048,1020049,1020050,1020051,1020052,1020053,1020054,1020055,1020056,1020057,1020058,1020059,1020060,1020061,1020062,1020063,1020064,1020065,1020066,1020067,1020068,1020069,1020070,1020071,1020072,1020073,1020074,1020075,1020076,1020077,1020078,1020079,1020080,1020081,1020082,1020083,1020084,1020085,1020086,1020087,1020088,1020089,1020090,1020091,1020092,1020093,1020094,1020095,1020096,1020097,1020098,1020099,1020100,1020101,1020102,1020103,1020104,1020105,1020106,1020107,1020108,1020109,1020110,1020111,1020112,1020113,1020114,1020115,1020116,1020117,1020118,1020119,1020120,1020121,1020122,1020123,1020124,1020125,1020126,1020127,1020128,1020129,1020130,1020131,1020132,1020133,1020134,1020135,1020136,1020137,1020138,1020139,1020140,1020141,1020142,1020143,1020144,1020145,1020146,1020147,1020148,1020149,1020150],["Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Malus angustifolia (Aiton) Michx. ","Vitis cinerea (Engelm.) Millardet var. floridana Munson ","Pyrus communis L. ","Pyrus communis L. ","Vitis  hybr.","Malus angustifolia (Aiton) Michx. ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Malus angustifolia (Aiton) Michx. ","Vitis  hybr.","Pyrus communis L. ","Pyrus communis L. ","Vitis  hybr.","Malus angustifolia (Aiton) Michx. ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp."," ","Malus angustifolia (Aiton) Michx. ","Vitis  hybr.","Pyrus communis L. ","Pyrus communis L. ","Vitis aestivalis Michx. ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Hordeum vulgare L. subsp. vulgare ","Zea mays L. subsp. mays ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Vitis  hybr.","Pyrus communis L. ","Pyrus communis L. ","Vitis aestivalis Michx. var. aestivalis ","Phaseolus  spp.","Avena sativa L. ","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Vitis  hybr.","Pyrus communis L. ","Pyrus communis L. ","Vitis cinerea (Engelm.) Millardet var. floridana Munson ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Hordeum vulgare L. subsp. vulgare ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Pyrus pseudopashia T. T. Yu ","Avena sativa L. ","Vitis  hybr.","Vitis aestivalis Michx. var. aestivalis ","Pyrus  hybr.","Avena sativa L. ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Hordeum vulgare L. subsp. vulgare ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Phaseolus  spp.","Pyrus pashia Buch.-Ham. ex D. Don ","Avena sativa L. ","Vitis cinerea (Engelm.) Millardet var. floridana Munson ","Vitis  hybr.","Pyrus  hybr.","Phaseolus  spp.","Aegilops longissima Schweinf. &amp; Muschl. ","Tripidium kanashiroi (Ohwi) Welker et al. ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Zea mays L. subsp. mays ","Tripidium kanashiroi (Ohwi) Welker et al. ","Aegilops longissima Schweinf. &amp; Muschl. ","Phaseolus  spp.","Pyrus communis L. ","Vitis cinerea (Engelm.) Millardet var. floridana Munson ","Phaseolus  spp.","Vitis shuttleworthii House ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Vitis shuttleworthii House ","Phaseolus  spp.","Pyrus communis L. ","Vitis  hybr.","Phaseolus  spp.","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Hordeum vulgare L. subsp. vulgare ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Phaseolus  spp.","Vitis vinifera L. subsp. vinifera ","Vitis vinifera L. subsp. vinifera ","Phaseolus  spp.","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Pyrus communis L. ","Pyrus communis L. ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Vitis vinifera L. subsp. vinifera ","Phaseolus  spp.","Gossypium hirsutum L. ","Aegilops longissima Schweinf. &amp; Muschl. ","Zea mays L. subsp. mays ","Pyrus communis L. ","Vitis  hybr.","Vitis  hybr.","Pyrus communis L. ","Zea mays L. subsp. mays ","Aegilops longissima Schweinf. &amp; Muschl. ","Gossypium hirsutum L. ","Phaseolus  spp.","Phaseolus  spp.","Pyrus ×nivalis Jacq. "],["AEG-1032-30","TEX 2371","4-2","GMAL 2371","Duval"," "," "," ","GMAL 2372","5-2","TEX 2372","AEG-1033-31","PRV 20","PRV 21","Oderbrucker","AEG-1034-32","TEX 2373","5-1-8","GMAL 2373","FLA CA 4-72"," "," ","FLA W1521","GMAL 2374","5-3","TEX 2374","AEG-1037-35","PRV 26","PRV 27","Chevalier","AEG-1038-36","TEX 2375","9-1"," ","GMAL 2375","FLA. N4-12"," "," ","Pixiola","9-3","TEX 2376","AEG-1040-38","Abyssinian","PRV 33","PRV 34","Abyssinian Intermediate","AEG-1043-41","TEX 2377","10-1","Meyer 6-7"," "," ","FLA CD 11-84","11-1"," ","TEX 2378","AEG-1045-43","PRV 35","PRV 40","AEG-1048-46","TEX 2379","11-2","Tampa"," "," ","AC 4-16","11-3","\"HUICHOL COTTON\"","AEG-1049-47","PRV 41","Abyssinian Intermediate","Abyssinian Intermediate","PRV 43","AEG-1059-6","TEX 2381","11-5","P. pseudopashia - Yunnan"," ","FLA CA 8-15","Rogers 640","P. salicifolia hybrid Bl. Mite Resist."," ","12-2","TEX 2382","AEG-1078-25","PRV 44","Abyssinian Intermediate","Black Abyssinian","PRV 45","AEG-1084-31","12-3","P. pashia 6002 - Nepal","German Gray Winter","AC 5-10","FLA W716"," ","13-1","AEG-1086-33","Erianthus kanashiroi","PRV 48","Abyssinian","PRV 55","Erianthus kanashiroi","AEG-1087-34","14-1"," "," ","15-15","Haines City","AEG-1088-35","PRV 57","PRV 61","AEG-1090-37","Kissimmee","16-16"," ","Leon Millot (Kuhlman 194)","17-9","AEG-1091-38","PRV 64","Abyssinian","PRV 65","AEG-1094-41","19-6-21","Muscat Caillaba","Muscat of Hungary","M51","AEG-1105-52","PRV 68"," "," ","PRV 70","AEG-1109-56","TEX 2391","M177","White Calabrian","M247","TEX 2392","AEG-1125-2","PRV 71"," ","Aurelia","Mantey"," ","PRV 72","AEG-1140-17","TEX 2393","M257","M542-1-1","SPECIES GROUP 1"],[" ","Cotton Collection"," ","Natl. Germplasm Repository - Geneva","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," "," ","Cotton Collection"," ","North Central Regional PI Station","North Central Regional PI Station","National Small Grains Collection"," ","Cotton Collection"," ","Natl. Germplasm Repository - Geneva","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Geneva"," ","Cotton Collection"," ","North Central Regional PI Station","North Central Regional PI Station","National Small Grains Collection"," ","Cotton Collection"," "," ","Natl. Germplasm Repository - Geneva"," ","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," ","Cotton Collection"," ","National Small Grains Collection","North Central Regional PI Station","North Central Regional PI Station","National Small Grains Collection"," ","Cotton Collection"," ","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," ","National Small Grains Collection","Cotton Collection"," ","North Central Regional PI Station","North Central Regional PI Station"," ","Cotton Collection"," ","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," ","Cotton Collection"," ","North Central Regional PI Station","National Small Grains Collection","National Small Grains Collection","North Central Regional PI Station"," ","Cotton Collection"," ","Natl. Germplasm Repository - Corvallis","National Small Grains Collection","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","National Small Grains Collection"," ","Cotton Collection"," ","North Central Regional PI Station","National Small Grains Collection","National Small Grains Collection","North Central Regional PI Station"," "," ","Natl. Germplasm Repository - Corvallis","National Small Grains Collection","Natl. Germplasm Repository - Davis"," ","Natl. Germplasm Repository - Corvallis"," "," ","Natl. Germplasm Repository - Miami","North Central Regional PI Station","National Small Grains Collection","North Central Regional PI Station","Natl. Germplasm Repository - Miami"," "," ","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," ","Natl. Germplasm Repository - Davis"," ","North Central Regional PI Station","North Central Regional PI Station"," ","Natl. Germplasm Repository - Davis"," ","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Davis"," "," ","North Central Regional PI Station","National Small Grains Collection","North Central Regional PI Station"," "," ","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Davis"," "," ","North Central Regional PI Station","Natl. Germplasm Repository - Corvallis","Natl. Germplasm Repository - Corvallis","North Central Regional PI Station"," ","Cotton Collection"," ","Natl. Germplasm Repository - Davis"," ","Cotton Collection"," ","North Central Regional PI Station","Natl. Germplasm Repository - Corvallis"," ","Natl. Germplasm Repository - Davis","Natl. Germplasm Repository - Corvallis","North Central Regional PI Station"," ","Cotton Collection"," "," "," "],["05 Feb 1993","1986","01 Jan 1989","27 Aug 1987","05 Feb 1990","14 Feb 1990","14 Feb 1990","07 Feb 1990","27 Aug 1987","01 Jan 1989","06 Jul 1939","05 Feb 1993","16 Feb 1983","16 Feb 1983","1917","05 Feb 1993","1986","01 Jan 1989","27 Aug 1987","05 Feb 1990","14 Feb 1990","14 Feb 1990","05 Feb 1990","27 Aug 1987","01 Jan 1989","1986","05 Feb 1993","16 Feb 1983","16 Feb 1983","1917","05 Feb 1993","1986","01 Jan 1989"," ","27 Aug 1987","05 Feb 1990","14 Feb 1990","14 Feb 1990","05 Feb 1990","01 Jan 1989","1986","05 Feb 1993","1917","16 Feb 1983","16 Feb 1983","1917","05 Feb 1993","1986","01 Jan 1989","05 Feb 1990","14 Feb 1990","14 Feb 1990","05 Feb 1990","01 Jan 1989","22 Mar 1927","1987","05 Feb 1993","16 Feb 1983","16 Feb 1983","05 Feb 1993","1986","01 Jan 1989","05 Feb 1990","14 Feb 1990","14 Feb 1990","05 Feb 1990","01 Jan 1989","1987","05 Feb 1993","16 Feb 1983","1917","1917","16 Feb 1983","05 Feb 1993","1987","01 Jan 1989","22 Feb 1990","Feb 1927","05 Feb 1990","05 Feb 1990","07 Mar 1990","Feb 1927","01 Jan 1989","1987","05 Feb 1993","16 Feb 1983","1917","1917","16 Feb 1983","05 Feb 1993","01 Jan 1989","27 Feb 1990","11 Jul 1927","05 Feb 1990","05 Feb 1990","27 Feb 1990","01 Jan 1989","05 Feb 1993","06 Jul 1939","16 Feb 1983","1917","16 Feb 1983","06 Jul 1939","05 Feb 1993","01 Jan 1989","01 Mar 1990","05 Feb 1990","01 Jan 1989","05 Feb 1990","05 Feb 1993","16 Feb 1983","16 Feb 1983","05 Feb 1993","05 Feb 1990","01 Jan 1989","05 Apr 1990","22 Feb 1990","01 Jan 1989","05 Feb 1993","16 Feb 1983","1917","16 Feb 1983","05 Feb 1993","01 Jan 1989","20 Feb 1990","20 Feb 1990","01 Jan 1989","05 Feb 1993","16 Feb 1983","05 Apr 1990","05 Apr 1990","16 Feb 1983","05 Feb 1993","1985","01 Jan 1989","20 Feb 1990","01 Jan 1989","1985","05 Feb 1993","16 Feb 1983","05 Apr 1990","16 Mar 1990","23 Jul 1990","05 Apr 1990","16 Feb 1983","05 Feb 1993","1985","01 Jan 1989","01 Jan 1989","24 Apr 1990"],["Wild material"," ","Wild material"," ","Cultivated material","Cultivar","Cultivar","Cultivated material"," ","Wild material"," ","Wild material","Cultivated material","Cultivated material","Breeding material","Wild material"," ","Wild material"," ","Breeding material","Cultivar","Cultivar","Breeding material"," ","Wild material"," ","Wild material","Cultivated material","Cultivated material","Cultivar","Wild material"," ","Wild material"," "," ","Breeding material","Cultivar","Cultivar","Cultivated material","Wild material"," ","Wild material","Landrace","Cultivated material","Cultivated material","Landrace","Wild material"," ","Wild material","Breeding material","Cultivar","Cultivar","Breeding material","Wild material","Cultivar"," ","Wild material","Cultivated material","Cultivated material","Wild material"," ","Wild material","Cultivated material","Cultivar","Cultivar","Breeding material","Wild material"," ","Wild material","Cultivated material","Landrace","Landrace","Cultivated material","Wild material"," ","Wild material","Wild material","Cultivar","Breeding material","Breeding material","Breeding material","Cultivar","Wild material"," ","Wild material","Cultivated material","Landrace","Landrace","Cultivated material","Wild material","Wild material","Wild material","Uncertain improvement status","Breeding material","Breeding material","Cultivar","Wild material","Wild material"," ","Cultivated material","Landrace","Cultivated material"," ","Wild material","Wild material","Cultivar","Cultivated material","Wild material","Cultivated material","Wild material","Cultivated material","Cultivated material","Wild material","Cultivated material","Wild material","Cultivar","Cultivated material","Wild material","Wild material","Cultivated material","Landrace","Cultivated material","Wild material","Wild material","Cultivated material","Cultivated material","Wild material","Wild material","Cultivated material","Cultivar","Cultivar","Cultivated material","Wild material"," ","Wild material","Cultivated material","Wild material"," ","Wild material","Cultivated material","Cultivar","Cultivated material","Cultivated material","Cultivar","Cultivated material","Wild material"," ","Wild material","Wild material","Cultivated material"],[" ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation"," "," "," "," ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," ","National Laboratory for Genetic Resources Preservation"," "," ","National Laboratory for Genetic Resources Preservation"," "," ","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," ","National Laboratory for Genetic Resources Preservation"," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," ","National Laboratory for Genetic Resources Preservation"," "," ","National Laboratory for Genetic Resources Preservation"," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation"," "," ","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "," "," ","National Laboratory for Genetic Resources Preservation"," "," "," "," ","National Laboratory for Genetic Resources Preservation"," "," "," "," "," "]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Accession<\/th>\n      <th>Taxonomic name<\/th>\n      <th>Code name<\/th>\n      <th>Maintenance location<\/th>\n      <th>Received<\/th>\n      <th>Status<\/th>\n      <th>Backup location<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="tables" class="section level2">
+<h2>Tables?</h2>
+<p>One last note. What if there are tables embedded in webpages, and we would like to extract the table as is? For example, take a look at the Observation tab of the accession.</p>
+<div class="figure">
+<img src="img/table.png%20=350x" alt="" />
+<p class="caption">Table</p>
+</div>
+<p><code>xml2</code> provides a really clean way of doing this. We can use the <code>html_table()</code> function instead of <code>html_text()</code> to conveniently convert this table into a list</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>obs.table &lt;-<span class="st"> </span>html.chickpea <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">&quot;//*[@id=&#39;MainContent_ctrlObservation_gvPhen&#39;]&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">  </span><span class="kw">html_table</span>()</span></code></pre></div>
+<p>Easily reproducible table:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>DT<span class="op">::</span><span class="kw">datatable</span>(<span class="kw">data.frame</span>(obs.table), <span class="dt">rownames =</span> F)</span></code></pre></div>
+<div id="htmlwidget-5e84213919d3c03eeabf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e84213919d3c03eeabf">{"x":{"filter":"none","data":[["GROWTH","GROWTH","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY","MORPHOLOGY"],["Plant growth habit","Plant Height","Flower color","Pods per peduncle","Seeds per pod","Leaf type","Seed type","Seed type","Seed coat color","Seed shape","Seed texture","Seed weight 100","Pod Length","Leaflet Number","Pigmentation","Pod width","Seed black dots"],["Growth habit of plants recorded at podding stage.","Height of mature plant measured in centimeters","Flower color just after opening.","Number of pods per peduncle if the same number occurs on several plants in the accession.","Maximum number of seeds per pod if the same number occurs on several plants in the accession.","General botanical description for the simple and compound leaf types.","General terms of Indian origin used to separate the two basic chickpea types.","General terms of Indian origin used to separate the two basic chickpea types.","Seed coat color after harvest and cleaning.","Designation of overall seed shape &amp; seedcoat smoothness","Seed texture","Weight of 100 seeds in grams.","Pod length measured in millimeters","Leaflets per leaf","Pigmentation of the plant","Pod width measured in millimeters","Absence or presence of black dots on the seed"],["SS - Semi-spreading","28","WH - White","1","1.6","PC - Pinnately compound. Imparipinnate/paripinnate.","D - Desi:smaller size and contain Anthocyan. Ang. shape/wrink surf Sperical types exist. Sd. coats adhere loose to cotyl. wall.","K - Kabuli:large light color sd. - owl, brain, spherical shaped. Sdcoats usually have no Anthocyan. and adhere to cotyl wall.","CR - Cream/beige","OL - Owl/brain","S - SMOOTH SEED COAT","21.4","7 - Long ( &gt; 20 mm)","3 - 10-11 leaflets","1 - No anthocyanin, stems and leaves pale green","10.9","- - Absent of black dots on the seed"],["Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","CHICKPEA.YEARS.WRPIS","Click for an Excel spread sheet of the 2001 Cicer data from Central Ferry farm in Washington state(.xls).  \"&gt;CHICKPEA.2001.CFERRY","Click for an Excel spread sheet of the 2001 Cicer data from Central Ferry farm in Washington state(.xls).  \"&gt;CHICKPEA.2001.CFERRY","Click for an Excel spread sheet of the 2001 Cicer data from Central Ferry farm in Washington state(.xls).  \"&gt;CHICKPEA.2001.CFERRY","Click for an Excel spread sheet of the 2001 Cicer data from Central Ferry farm in Washington state(.xls).  \"&gt;CHICKPEA.2001.CFERRY","CHICKPEA.SEEDWEIGHT.WRPIS","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2002 Cicer data from Central Ferry farm and Pullman, Washington farm (.xls).  \"&gt;CHICKPEA.2002.CFERRY","Click for an Excel spread sheet of the 2001 Cicer data from Central Ferry farm in Washington state(.xls).  \"&gt;CHICKPEA.2001.CFERRY"],["W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 97i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD","W6 2975 2001i SD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Category<\/th>\n      <th>Descriptor<\/th>\n      <th>Description<\/th>\n      <th>Value<\/th>\n      <th>Study<\/th>\n      <th>Inventory<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+---
+Title: "Automatic web scraping"
+Subtitle: "Using `Rselenium`"
+---
+
+
+To start, what if we want all pdfs?
+
+Can use xml_find_all
+
+# Could Zoom in closer but I don't know if that really helps
+#info <- url %>% html_nodes('body') %>% 
+#  xml_find_all("//ul[contains(@class, 'record-info')]") %>% 
+#  html_nodes('li')%>% 
+#  html_text() 
+
+info <- url %>% html_nodes('body') %>% 
+  xml_find_all("//ul[contains(@class, 'record-info')]") %>% 
+  html_text()
+  
+
+BASICS OF RVEST
+  ## Getting the info that is from the head as metadata
+name_nodes <- url %>% html_node("head") %>% html_nodes("meta") %>%
+  html_attr("name")
+
+content_nodes <- url %>% html_node("head") %>% html_nodes("meta") %>%
+  html_attr("content")
+
+head <- data.frame(cbind(name_nodes, content_nodes))
+head.wide <- pivot_wider(body, names_from = name_nodes, values_from = content_nodes)
+
+metadf <- cbind(head, body.wide)

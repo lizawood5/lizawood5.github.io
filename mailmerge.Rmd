@@ -1,0 +1,17 @@
+---
+title: <center>Embedding links into mail merge
+subtitle: <center>No, this is not computation, but... 
+---
+
+From Qualtrics, you get a csv, but Mailmerge wants an .xlsx
+
+https://stackoverflow.com/questions/17428891/add-variable-hyperlink-in-mail-merge-in-word-2013/37755628
+F9
+
+Make sure you then send it as an html, otherwise you lose all formatting
+
+Then, saving this document will not maintain your links. These will need to be redone
+
+In addition, emebedding an image will also need re-done. Be sure to send yourself multiple
+
+Layouts are difficult, you can use the indent to create a general margin
