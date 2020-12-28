@@ -1,24 +1,19 @@
 ---
 pagetitle: Tutorials
 title: <center>Tutorials</center>
-subtitle: <center>paying it forward for the hours spent pouring over others' tutorials</center>
 ---
 
 <br>
 <br>
-<br>
 
-###[Ordered logits introduction with `MASS` + `VGAM`](ol.partialprop.html)  
+[Ordered logits introduction with `MASS` + `VGAM`](ol.partialprop.html)  
 A brief introduction to ordered logits using two different packages in R, reviewing the different model specifications and some of the more advances features of the `VGAM` package, particularly non-proportional and partial proportional models. Example using simulated farmer survey data.  
 
-<br>
-###[Sequential ordered logits](ol.sequential.html)  
+[Sequential ordered logits](ol.sequential.html)  
 Advancing on the ordered logit introduction, this provides an overview of the continuation ratio (also called sequential) model to ordered logits that want to analyze a dependent ordinal variable that constitutes sequential stages. Example using simulated farmer survey data.  
 
-<br>
-###[Network introduction with `network` + `igraph`](network.intro.html)  
+[Network introduction with `network` + `igraph`](network.intro.html)  
 Digging into the differences in syntax of network packages for descriptives and plotting. This is mainly a comparison of `network` objects and `igraph` objects, and the slightly different approaches to working with these data. Example from a Twitter retweet network.  
 
-<br>
-###[Webscraping with `xml2` + `rvest`](web.scraping.rvest.html)  
+[Webscraping with `xml2` + `rvest`](web.scraping.rvest.html)  
 Reviewing some of the basic functions within `xml2` and `rvest` for database scraping, using an example of the National Germplasm Repository database.  

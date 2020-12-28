@@ -1,0 +1,301 @@
+---
+pagetitle: <center>Network basics</center>
+subtitle: <center>Exploring Twitter network descriptives and plotting \n with `sna`, `network`, and `igraph` packages</center>
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = TRUE)
+```
+
+Adapted from lessons by [Lorien Jasney](https://www.lorienjasny.com/) at [SESYNC](https://www.sesync.org/) Workshop on SES 
+
+<br>
+When I first started learning about networks (which was not long ago), I felt like it was tough to tell the difference between some of the main packages, how network objects acted differently between them, and why the syntax was different for basic exploration and plotting. So, here I am going to introduce two major packages for networks, `sna` and `networks` as one, and `igraph` as another, and review loading in data, looking at basic descriptives, and plotting.
+
+Let's start off with loading all of the packages we will need for this session.
+
+```{r packages, echo = T, results = F, warnings = F, message=F}
+library(network)
+library(sna)
+library(igraph)
+library(reshape2)
+library(tidyverse)
+```
+
+Before analyzing and visualizing your network, it is important to understand what kind of data you are loading into R, and how to get it from its original form into some kind of matrix or network object.
+
+Most data will start as a csv, either formatted as an edgelist (two columns matching whether there is a connection, representing an edge) and nodelist (details about the nodes of your edges), or as a matrix. This tutorial walks through getting your edgelist and nodelist dataframes into matrix or network formats. The data types and syntax are slightly different for each, and so it is good to be able to navigate both.
+
+I will be using a sample of a Twitter network. Twitter network examples often show a follower-followee networks, but this is a retweet/mention edgelist, gathered in methods by [Bastos et al. 2018](https://www.sciencedirect.com/science/article/pii/S0378873317301405).  While this is a small sample of the network data I have collected, it is a sizable group that helps demonstrate the scale of some Twitter network data, as well as some of the challenges to plotting in R.
+
+```{r read in data, echo = T}
+edge.list <- read.csv("data/twitter_edges.csv", na.strings = "NA")
+node.list <- read.csv("data/twitter_nodes.csv")
+```
+
+```{r, echo = F, include = F}
+edge.list <- dplyr::select(edge.list, -stripped_text)
+node.list <- dplyr::select(node.list, -bio)
+```
+
+If we take a look at the data, we see that we have one column with just node names, for now, and some edgelist attributes, included the text of the tweet that has been retweeted, and whether or not that tweet is a climate tweet (i.e. contains mention of climate related content).
+```{r setup}
+head(edge.list)
+head(node.list)
+```
+
+Note: If you don't have a nodelist, you can create one from your edgelist:
+
+```{r}
+node.list.sample <- edge.list %>% 
+   dplyr::select(from, to) %>%  
+   mutate(row = 1:nrow(edge.list)) %>% 
+   melt(id.vars = "row", var = "name") %>% 
+   dplyr::select(value) %>% unique() %>% 
+   rename("name" = "value")
+```
+
+### `network` and `sna` packages
+
+**Network creation and attributes**
+To turn an edgelist into a network using the `network` package, we can use the `network()` function and specify the matrix.type as an edgelist. If we had a matrix dataframe, however, we could specify either an "adjacency" or "incidence" matrix, for ego or bipartite networks, respectively. If you have edge attributes, as we do here, we can also use the the ignore.eval = F and name.eval argument to tell R to not ignore edge values, and to assign names to them.
+
+Similarly, the `as.network.matrix()` will do a similar job with similar arguments.
+
+```{r}
+net.network <- network(edge.list, matrix.type= "edgelist", ignore.eval = F,
+                       names.eval=c("date", "text", "climate_tweet"))
+
+net.network2 <- as.network.matrix(edge.list, matrix.type = "edgelist", 
+                                  ignore.eval = F, 
+                                  names.eval=c("date", "text", "climate_tweet"))
+```
+
+These network objects are a list data type, but are of the class network. As a note, the `network` package will refer to networks as networks, `sna` will refer to them as graphs, and later we will see `igraph` objects as their own class igraphs.
+
+```{r}
+typeof(net.network)
+class(net.network)
+```
+
+We can inspect the basic information of our network object as follows, and use the syntax `net %v% "node_attr_name"` and `net %e% "edge_attr_name"`
+```{r}
+# Basic network summary
+net.network
+# A look at edge attributes
+head(net.network %e% "climate_tweet")
+# Can we look at node attributes?
+head(net.network %v% "vertex.names")
+```
+
+We currently have only one node attribute, vertex.names, which is built in based on the names of the nodes in the edgelist. For any remaining information we might have to have about our nodes, we can assign manually from the nodelist. For instance, we can add the user name (rather than the Twitter handle, which we have in our edgelist) to a new node attribute called "name".
+
+```{r}
+net.network %v% "name" <- node.list$name 
+```
+
+**Descriptives**
+
+First we can think about the network as a whole. Below are a series of whole-network descriptives for the `network` and `sna` packages.
+```{r}
+# Using network package ---
+# Count up the nodes
+size <- network.size(net.network)
+# Count up the edges
+edges <- network.edgecount(net.network)
+# Measure density
+density <- network.density(net.network)
+# How many dyads?
+dyads <- network.dyadcount(net.network)
+
+# Using sna package ---
+# Density
+density <- gden(net.network)  
+# Connectedness
+connect <- connectedness(net.network) 
+```
+
+Next we will look at a few descriptives for individual nodes. Note that the degree function exists in `sna` and `igraph`, but they have different arguments. The `sna` function includes a cmode argument where the default is "freeman" for total degree, or "indegree" and "outdegree". Also the gmode argument asks for the graph's mode, where you can specify "digraph" for directed (default) or "graph" for undirected.
+
+```{r}
+# Total degree
+deg.total <- sna::degree(net.network, gmode = "digraph")
+# In degree
+in.deg <- sna::degree(net.network, cmode="indegree")
+# Out degree
+out.deg <- sna::degree(net.network, cmode="outdegree")
+# Betweenness centrality
+betweenness <- sna::betweenness(net.network)
+# Closeness centrality
+closeness <- sna::closeness(net.network) 
+# Eigenvector centrality
+egnvector <- sna::evcent(net.network) 
+```
+
+**Plotting**
+
+While you can plot network objects in base R, `gplot()` in `sna` provides a fea more features. First, let's look at our data without any modifications. This is a fairly large and non-descript plot, at first.
+
+```{r, fig.align= "center"}
+gplot(net.network)
+```
+
+To add some character to this graph, we can include a series of arguments within gplot.
+
+```{r, fig.align= "center"}
+# Set colors for edge attributes
+edge.colors <- ifelse(net.network %e% "climate_tweet" == "TRUE", 
+                      "goldenrod3", "darkgrey")
+# Get degree for node size
+deg <- sna::degree(net.network)
+# Assign labels only to largest nodes
+name.label <- ifelse(deg > 2800, net.network %v% "vertex.names", NA)
+
+gplot(net.network,
+      label = name.label,
+      usearrows = F,
+      edge.col = edge.colors,
+      edge.lwd = 0.2, # Edge line width
+      vertex.col = "cornflowerblue",
+      vertex.cex = deg/200, # Dividing the degree size by 10 to make more readable
+      displayisolates = F)
+```
+
+The reality is that in some cases, graphs are too busy to discern what is going on if every node is included. As with the degree function, both `network` and `igraph` have a `delete.vertices()` function.
+
+```{r}
+# Assign degree attribute
+net.network %v% "degree" <- sna::degree(net.network)
+# Use base R indexing brackets to identify which vertices to remove
+v.remove <- net.network %v% "degree" < 20
+v.remove <- str_which(v.remove, "TRUE")
+net.network.small <- network::delete.vertices(net.network, v.remove)
+
+# Check out our new network
+net.network.small
+```
+
+With this smaller network, we remove some noise, but not a whole lot.
+
+```{r}
+# Recalculating degree given smaller network
+edge.colors <- ifelse(net.network.small %e% "climate_tweet" == "TRUE", 
+                      "goldenrod3", "darkgrey")
+# Get degree for node size
+deg <- sna::degree(net.network.small)
+# Assign labels only to largest nodes
+name.label <- ifelse(deg > 2800, net.network.small %v% "vertex.names", NA)
+
+gplot(net.network.small,
+      label = name.label,
+      usearrows = F,
+      edge.col = edge.colors,
+      edge.lwd = 0.2, # Edge line width
+      vertex.col = "cornflowerblue",
+      vertex.cex = deg/200,
+      displayisolates = F)
+```
+
+## `igraph` package
+
+Now we are going to walk through similar steps, but with the `igraph` package.
+
+**Network creation and attributes**
+
+First, to create an `igraph` object from an edgelist, we use a different set of functions. There are a whole suite of `graph_from_` functions, including data frame, edgelist, adjacency, and incidence matrices. Specifically, the `graph_from_data_frame()` function allows us to enter the edges and nodes in together. Here we can use an edgelist as a dataframe, but also include out nodelist in the vertices argument.
+
+```{r}
+net.igraph <- graph_from_data_frame(d = edge.list, vertices = node.list, directed = T)  
+```
+
+igraph objects are of the same data type as other network objects -- a list -- but we can see that it is of a class of igraph.
+
+```{r}
+typeof(net.igraph)
+class(net.igraph)
+```
+
+For igraph objects, the syntax for calling upon vertices and edges is specific for `igraph` functions -- instead of using the %v% or %e% to call upon vertices and edges, we use a syntax more similar to dealing with columns in a dataframe. The function to call upon edges is `E()` and for vertices, `V()`. You can then use dollar signs to specify component -- that is,  `E(net)$attribute` and `V(net)$attribute`.
+ 
+First, we can call upon all edges using this call without a selector:
+```{r}
+E(net.igraph) 
+```
+
+And with a selector:
+```{r}
+head(E(net.igraph)$climate_tweet)
+```
+
+It took me a while to wrap my head around having a function that is a single letter, but it helped me to realize that the logic behind these network objects really is the same as the logic behind vectors. For instance, creating a vector and calling upon a certain object of it looks as follows:
+```{r}
+x <- c(3,7,8,4,3,2)
+df <- data.frame(x)
+df$x
+```
+
+This process is the exact same as this: 
+```{r}
+data.frame(x)$x
+```
+
+And so we could conceivably assign the edges to their own objects, as we usually do data.frames, as such:
+```{r}
+vertices <- V(net.igraph) 
+head(vertices$name)
+```
+
+But most tutorials I've seen on using igraph just skip this step, and keep it in one line:
+```{r}
+head(V(net.igraph)$name)
+```
+
+
+**Descriptives**
+
+There are similar descriptive functions as in the `network` and `sna` package, but with slightly different arguments. For instance with degree, instead of cmode = c("family", "indegree", "outdegree"), we are now working with mode = c("all", "in", "out", "total"), where all and total are synonymous. Overall, many of these packages have overlapping names for functions that are virtually the same, but if both packages are loaded be sure to specify the library -- the `sna` functions don't accept igraph objects.
+
+```{r}
+deg.total <- igraph::degree(net.igraph, mode="all")
+```
+
+**Plotting**  
+
+In `igraph` we are using base R to plot, and so we can set attributes before plotting. Before getting to this though, let's go ahead and start with a subsetted network that we decided on in the previous sections. 
+
+```{r}
+# Name the vertices we want removed
+v.remove <- V(net.igraph)[which(deg.total < 20)]
+# Just use the following function
+net.igraph <- igraph::delete.vertices(net.igraph, v.remove)
+```
+
+Okay, now let's set our plot attributes.
+
+```{r}
+# Edge attributes
+E(net.igraph)$color <- ifelse(E(net.igraph)$climate_tweet == TRUE, 
+                              "goldenrod3", "darkgrey")
+E(net.igraph)$width <- 0.2
+
+# Vertex attributes
+V(net.igraph)$color <- "cornflowerblue"
+V(net.igraph)$size <- igraph::degree(net.igraph, mode="all")/200
+
+# Assign labels only to largest nodes
+V(net.igraph)$label <- unname(ifelse(igraph::degree(net.igraph)[V(net.igraph)] > 2800,
+                                     names(V(net.igraph)), "")) 
+V(net.igraph)$label.color="black"
+
+# Arrows
+E(net.igraph)$arrow.size <- 0
+```
+
+Last, we can use the simplify function before plotting to specify certain parameters to simplify the graph, such as removing multiple edges and loops. While I do not remove multiple edges here, we can remove loops if we want.
+
+```{r}
+net.igraph <- igraph::simplify(net.igraph, remove.multiple = F, remove.loops = T) 
+plot(net.igraph, displayisolates = F)
+```
+
+Overall plotting networks in R can be finicky and slow. While these packages are great for statistical analyses on networks, as well as getting a first glance at your network, they might not be the best place for visualization. I am excited to read more on the advances of [`ggraph` for networks](https://ggplot2-book.org/networks.html), and great additional resource is [Katya Ognyanova's website](https://kateto.net/network-visualization), who has great reviews for visualizing networks through a variety of packages.

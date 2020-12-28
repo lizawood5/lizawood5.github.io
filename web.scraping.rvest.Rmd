@@ -40,11 +40,16 @@ First, how do you get a CSS selector or Xpath? Widely recommended is [Selector G
 
 Here we open the extension (the small bar in the middle right of the screen) and click to the objects on the webpage that we are interested in (Note I also have the HTML elements open using Cmd+Opt+i at the bottom of the page, but this isn't necessary). I've clicked on the overall content of the page I want, and Selector Gadget automatically chooses the items it thinks compatible with your selection, turning them green and/or yellow. If it selects objects beyond what you want, you can click on them to un-select. The Selector Gadget bar will indicate how many objects the selector includes (in the case below, 1), and provide the CSS selector by default, which can be copied for use in your code.
 
-![Selector gadget](img/selector.pngv=400x)
+```{r, echo=FALSE, out.width= "75%", fig.align= "center"}
+knitr::include_graphics("img/selector.png")
+```
 
 If you want the Xpath, you just need to click on that button and the Xpath should pop up in a separate window.
 
-![Xpath](img/xpath.png =250x) 
+```{r, echo=FALSE, out.width= "25%", fig.align= "center"}
+knitr::include_graphics("img/xpath.png")
+```
+
 Now, we can use this information in `html_nodes()`. Note that these functions work within pipes, which I prefer for readability. So, we can extract the whole of the content of interest, using the Xpath we identified above.
 
 ```{r}
@@ -186,7 +191,10 @@ DT::datatable(total.DT, rownames = F)
 
 One last note. What if there are tables embedded in webpages, and we would like to extract the table as is? For example, take a look at the Observation tab of the accession.
 
-![Table](img/table.png =350x)
+```{r, echo=FALSE, out.width= "75%", fig.align= "center"}
+knitr::include_graphics("img/table.png")
+```
+
 
 `xml2` provides a really clean way of doing this. We can use the `html_table()` function instead of `html_text()` to conveniently convert this table into a list
 
