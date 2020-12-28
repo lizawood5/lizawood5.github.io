@@ -1,6 +1,7 @@
 ---
-title: "Easy web scraping"
-subtitle: "Some `xml2` and `rvest` basics"
+pagetitle: Web scraping
+title: <center> Web scraping </center>
+subtitle: <center> `xml2` and `rvest` basics </center>
 ---
 
 ```{r, include=FALSE}

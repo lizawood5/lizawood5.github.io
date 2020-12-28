@@ -1,5 +1,6 @@
 ---
-pagetitle: <center>Network basics</center>
+pagetitle: Network basics
+title: <center>Network basics</center>
 subtitle: <center>Exploring Twitter network descriptives and plotting \n with `sna`, `network`, and `igraph` packages</center>
 ---
 

@@ -1,6 +1,6 @@
 ---
-pagetitle: Ordereg logit intro
-title: <center>Ordered Logits -- Proportional and non-proportional sequential models</center>
+pagetitle: Sequential logits
+title: <center>Sequntial ordered Logits</center>
 subtitle: <center>Digging deeper in `vglm()`</center>
 ---
 

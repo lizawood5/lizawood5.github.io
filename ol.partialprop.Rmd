@@ -1,6 +1,7 @@
 ---
-title: "Ordered logits introduction"
-subtitle: A quick look at `polr` and `vglm`
+pagetitle: Ordered logits
+title: <center>Ordered logits introduction</center>
+subtitle: <center>A quick look at `polr` and `vglm`</center>
 ---
 
 Logistic regression models that regress on an **ordinal** dependent variable (think: Likert scale responses, course grades, categories that have a natural sequence, etc.) will use an **ordered logit**. Ordered logits are often run in R using `polr` in the MASS package, however the `vglm` function in the VGAM package offers a more advanced suite of options. This tutorial walks through setting up ordered logits with each function.  
