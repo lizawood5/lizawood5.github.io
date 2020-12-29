@@ -5,7 +5,7 @@ subtitle: <center>Exploring Twitter network descriptives and plotting \n with `s
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, results = TRUE)
+knitr::opts_chunk$set(echo = TRUE, results = TRUE, warning = F)
 ```
 
 Adapted from lessons by [Lorien Jasney](https://www.lorienjasny.com/) at [SESYNC](https://www.sesync.org/) Workshop on SES 
@@ -63,13 +63,13 @@ To turn an edgelist into a network using the `network` package, we can use the `
 
 Similarly, the `as.network.matrix()` will do a similar job with similar arguments.
 
-```{r}
+```{r, warning = F}
 net.network <- network(edge.list, matrix.type= "edgelist", ignore.eval = F,
-                       names.eval=c("date", "text", "climate_tweet"))
+                       names.eval=c("date", "climate_tweet"))
 
 net.network2 <- as.network.matrix(edge.list, matrix.type = "edgelist", 
                                   ignore.eval = F, 
-                                  names.eval=c("date", "text", "climate_tweet"))
+                                  names.eval=c("date", "climate_tweet"))
 ```
 
 These network objects are a list data type, but are of the class network. As a note, the `network` package will refer to networks as networks, `sna` will refer to them as graphs, and later we will see `igraph` objects as their own class igraphs.

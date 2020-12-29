@@ -5,7 +5,7 @@ title: <center>Projects</center>
 ### {.tabset .tabset-fade}
 
 #### Seed innovation systems
-<img width="250" height="340" style="float: right; margin-left: 2em;" src="img/field.jpg">
+<img width="266" height="360" style="float: right; margin-left: 2em;" src="img/field.jpg">
 Seed systems -- the seed savers, breeders, producers, companies, and ag-innovation agencies that are responsible for supplying our agricultural system with seeds -- are complex networks that rely on coordination of information and resources across multiple stakeholders.  Little is known about the systems-level interactions that support such a system, and the organic sector faces particular challenges with regards to research & development, intellectual property protections, and supply chain reliability. My work in this field has three major components.  
 
 Along with the Organic Seed Alliance, I am conducting network analyses of organic seed systems to better understand opportunities for increasing social-ecological resilience. This project is funded by the [Western Sustainable Agriculture Research and Education Program](https://projects.sare.org/sare_project/GW20-216/).  
@@ -16,7 +16,7 @@ I will combine a series of unique data sets -- data from germplasm databases, se
 
 
 #### Ag policy for environmental conservation
-<img width="250" height="340" style="float: right; margin-left: 2em;" src="img/tractor.jpg">
+<img width="266" height="360" style="float: right; margin-left: 2em;" src="img/tractor.jpg">
 How policies affect farmer behavior to confront environmental challenges has major implications for the sustainability of the food system. Policies such as voluntary incentives and certification, mandatory reporting, and sponsored research support are just some of the approaches utilized by the US government. My work in this area looks at two different policy-environment interfaces: mandatory information-based policy tools for nitrogen management, and collaborative governance approaches for groundwater management.  
 
 The Irrigated Lands Regulatory Program is a California policy that mandates engagement with information-based tools, particularly educational meetings and plan-writing. In this context we evaluate farmers surveys and use ordered logistic regression models to better understand the stages that farmers go through as they learn about nitrogen management.  

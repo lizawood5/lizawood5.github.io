@@ -5,7 +5,6 @@ title: <center>About</center>
 <br>
 <br>
  <img width="250" height="350" style="float: left; margin-right: 2em;" src="img/profile.jpeg">
- 
 I am a third-year PhD student at University of California, Davis and a member of the Center for Environmental Policy, earning my degree in Ecology with a Designated Emphasis in Computational Social Science. For my dissertation I research how governance of seed systems impacts outcomes for biodiversity and social-ecological resilience, particularly in  the context of climate change. Beyond this, I also work on issues related to agricultural policy and farmer behavior in California's Central Valley, and enjoy teaching and being involved in R user groups on campus. I currently hold degrees in Sustainability Science and Policy (MSc), Organic Farming (MSc), and Biology and Political Science (BA). More in my [CV](cv.html).  
 
 <br>
