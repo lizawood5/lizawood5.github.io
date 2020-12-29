@@ -1,4 +1,5 @@
 ---
+pagetitle: CV
 title: <center>Liza Wood</center>
 subtitle: <center>Center for Environmental Policy & Behavior <br> University of California, Davis </center>
 ---
@@ -34,6 +35,7 @@ College of Charleston Summer Undergraduate Research with Faculty Grant | Charles
 
 <h4>PEER-REVIEWED PUBLICATIONS</h4>   
 
+Rudnick, J, Lubell, M, Khalsa, SDS., Tatge, S, **Wood, L**, Sears, M, Brown, P. (2021) A Farm Systems Approach to the Adoption of Sustainable Nitrogen Management Practices in California. *Agriculture and Human Values, In Press*
 Wang, J, Hasanalieva, G., **Wood, L**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 1. Mycotoxin content. *Food Chemistry 327*, 127011.  
 Wang, J, Chatzidimitriou, E., **Wood, L**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 2. Antioxidant activity, and phenolic and mineral content. *Food Chemistry: X 6*, 100091.  
 Chaffin, L., Korey, C., Warnick, D., & **Wood, L**. (2019). Life So Far: A Grounded Theory Analysis of College Student Transitions Through the Sophomore Year. *Journal of The First Year Experience & Students in Transition 31(2)*, 79-93.  
@@ -112,6 +114,7 @@ Climate & Fisheries Extension Researcher | SC Sea Grant Consortium <span style="
 
 <h4>SERVICE</h4>
 
+R-Ladies Member & Facilitator| R-Ladies UC Davis <span style="float:right;">2019 – present</span> 
 Diversity Committee Member, Awards and Admissions Subcommittee | UC Davis <span style="float:right;">2019 – present</span>  
 Sustainability Literacy Implementation Committee Member | College of Charleston <span style="float:right;">2017 – 2018</span>   
 Faculty for Sustainable Living Workshop Coordinator | College of Charleston <span style="float:right;">2016 – 2018</span>   
