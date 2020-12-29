@@ -1,6 +1,6 @@
 ---
 pagetitle: Sequential logits
-title: <center>Sequntial ordered Logits</center>
+title: <center>Sequential ordered logits</center>
 subtitle: <center>Digging deeper in `vglm()`</center>
 ---
 
