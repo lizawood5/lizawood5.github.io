@@ -1,13 +1,13 @@
 body {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 p {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 pre {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .golden { background-color:#ffe8aa; border-radius: 5px; padding: 12px;}
