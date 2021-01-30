@@ -15,5 +15,5 @@ Advancing on the ordered logit introduction, this provides an overview of the co
 [Network introduction with `network` + `igraph`](network.intro.html)  
 Digging into the differences in syntax of network packages for descriptives and plotting. This is mainly a comparison of `network` objects and `igraph` objects, and the slightly different approaches to working with these data. Example from a Twitter retweet network.  
 
-[Webscraping with `xml2` + `rvest`](tutorials/web.scraping.rvest.html)  
+[Webscraping with `xml2` + `rvest`](web.scraping.rvest.html)  
 Reviewing some of the basic functions within `xml2` and `rvest` for database scraping, using an example of the National Germplasm Repository database.  
