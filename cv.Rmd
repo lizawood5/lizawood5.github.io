@@ -9,7 +9,7 @@ subtitle: <center>Center for Environmental Policy & Behavior <br> University of 
 
 #### EDUCATION
 
-Ph.D. Student, Ecology | Designated Emphasis: Computational Social Science <span style="float:right;">2018 – present</span>  
+Ph.D. Candidate, Ecology | Designated Emphasis: Computational Social Science <span style="float:right;">2018 – present</span>  
 University of California Davis, Davis, CA  
 M.Sc., Organic Farming and Food Production Systems                        <span style="float:right;">2015</span>  
 Newcastle University, Newcastle upon Tyne, United Kingdom  
@@ -36,7 +36,7 @@ College of Charleston Summer Undergraduate Research with Faculty Grant | Charles
 
 <h4>PEER-REVIEWED PUBLICATIONS</h4>   
 
-Wang, J., Baranski, M., Korkut, R., Ashraa Kalee, H., **Wood, L.**, et al. (2021). Performance of Modern and Traditional Spelt Wheat (*Triticum spelta*) Varieties in Rain-Fed and Irrigated,Organic and Conventional Production Systems in a Semi-Arid Environment; Results from Exploratory Field Experiments in Crete, Greece. *Agronomy 11*, 809. https://doi.org/10.3390/agronomy11050890
+Wang, J., Baranski, M., Korkut, R., Ashraa Kalee, H., **Wood, L.**, et al. (2021). Performance of Modern and Traditional Spelt Wheat (*Triticum spelta*) Varieties in Rain-Fed and Irrigated,Organic and Conventional Production Systems in a Semi-Arid Environment; Results from Exploratory Field Experiments in Crete, Greece. *Agronomy 11*, 809. https://doi.org/10.3390/agronomy11050890  
 Rudnick, J., Lubell, M., Khalsa, S.D.S., Tatge, S., **Wood, L.**, Sears, M., Brown, P. (2021). A Farm Systems Approach to the Adoption of Sustainable Nitrogen Management Practices in California. *Agriculture and Human Values.* https://doi.org/10.1007/s10460-021-10190-5.  
 Wang, J., Hasanalieva, G., **Wood, L.**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour – Results of a retail survey in the UK and Germany – 3. Pesticide residue content. *Food Chemistry: X 7*, 100089. https://doi.org/10.1016/j.fochx.2020.100089.  
 Wang, J., Chatzidimitriou, E., **Wood, L.**, et al. (2020). Effect of wheat species (*Triticum aestivum* vs *T. spelta*), farming system (organic vs conventional) and flour type (wholegrain vs white) on composition of wheat flour; results of a retail survey in the UK and Germany – 2. Antioxidant activity, and phenolic and mineral content. *Food Chemistry: X 6*, 100091. https://doi.org/10.1016/j.fochx.2020.100091.  
